@@ -1,0 +1,36 @@
+body {
+  padding-top: 50px;
+}
+
+/* Should contain all floated and non-floated content, so it needs to
+ * establish a new block formatting context without using overflow: hidden. */
+.container {
+  display: inline-block;
+  width: 100%;
+  zoom: 1; /* new block formatting context via hasLayout for IE 6/7 */
+}
+
+/* Fixed-width floated sidebar. */
+.sidebar {
+  float: left;
+  width: 360px;
+  background-color: rgb(246,242,164);
+  background:none repeat scroll 0% 0% rgb(255,254,219);
+}
+
+/* Needs to make space for the sidebar. */
+.main {
+  margin-left: 360px;
+  background-color: rgb(242,185,141); 
+  background:none repeat scroll 0% 0% rgb(254,229,208);
+  overflow: auto; 
+}
+
+/* Establishes a new block formatting context to insulate descendants from
+ * the floating sidebar. */
+.main-content {
+  display: inline-block;
+  width: 100%;
+  zoom: 1; /* new block formatting context via hasLayout for IE 6/7 */
+}
+	     

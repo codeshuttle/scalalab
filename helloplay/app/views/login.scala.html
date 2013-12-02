@@ -1,0 +1,34 @@
+@(form: Form[Auth.Login])(implicit session: play.api.mvc.Session)
+	
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+	    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
+	    <link rel='stylesheet' href='@routes.Assets.at("stylesheets/index.css")'>
+    </head>
+    <body>
+        <h1>Sign in</h1>
+    @helper.form(routes.Auth.authenticate) {
+    	 @if(form.hasGlobalErrors) { 
+              <div class="alert alert-error">
+              <a class="close" data-dismiss="alert">×</a>
+                  @form.globalError.map { error =>
+			  <div>@error.message</div>
+			}
+              </div>
+          }
+	
+	   <p>
+	       <input type="email" name="email" placeholder="Email" value="@form("email").value">
+	   </p>
+	   <p>
+	       <input type="password" name="password" placeholder="Password">
+	   </p>
+	   <p>
+	       <button type="submit">Login</button>
+	   </p>
+	}
+    </body>
+</html>

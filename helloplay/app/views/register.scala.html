@@ -1,0 +1,29 @@
+@()(implicit session: play.api.mvc.Session)
+
+@import helper._
+
+@main("") {
+
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/register.min.js")'></script>
+    
+    <div class="container">
+  <div class="sidebar">
+  <h4>Register yourself : </h4>
+    <form id="register-form">
+				Name :<input name="name"/></br>
+				Email :<input name="email"/></br>
+				Password : <input name="password" type="password"/></br>
+				<input name="id" type="hidden" value="0"/></br>
+			    <input type="button" id="submit" value="Add"/>
+			</form>
+  </div>
+  <div class="main">
+    <div class="main-content">
+      <h4>Users :</h4>
+		    <ul id="user-list"></ul>
+    </div>
+  </div>
+</div>
+    
+
+}
