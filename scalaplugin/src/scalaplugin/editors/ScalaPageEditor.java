@@ -32,6 +32,8 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.ide.IDE;
 
+import scalaplugin.Console;
+
 /**
  * An example showing how to create a multi-page editor.
  * This example has 3 pages:
@@ -57,6 +59,7 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 	public ScalaPageEditor() {
 		super();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+		Console.log(this.toString());
 	}
 	/**
 	 * Creates page 0 of the multi-page editor,
@@ -74,6 +77,7 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 				null,
 				e.getStatus());
 		}
+		Console.log(this.toString()+" createPage0");
 	}
 	/**
 	 * Creates page 1 of the multi-page editor,
@@ -100,6 +104,7 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 
 		int index = addPage(composite);
 		setPageText(index, "Properties");
+		Console.log(this.toString()+" createPage1");
 	}
 	/**
 	 * Creates page 2 of the multi-page editor,
@@ -114,11 +119,13 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 
 		int index = addPage(composite);
 		setPageText(index, "Preview");
+		Console.log(this.toString()+" createPage2");
 	}
 	/**
 	 * Creates the pages of the multi-page editor.
 	 */
 	protected void createPages() {
+		Console.log(this.toString()+" createPages");
 		createPage0();
 		createPage1();
 		createPage2();
@@ -131,12 +138,14 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 	public void dispose() {
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 		super.dispose();
+		Console.log(this.toString()+" dispose");
 	}
 	/**
 	 * Saves the multi-page editor's document.
 	 */
 	public void doSave(IProgressMonitor monitor) {
 		getEditor(0).doSave(monitor);
+		Console.log(this.toString()+" doSave");
 	}
 	/**
 	 * Saves the multi-page editor's document as another file.
@@ -148,6 +157,7 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 		editor.doSaveAs();
 		setPageText(0, editor.getTitle());
 		setInput(editor.getEditorInput());
+		Console.log(this.toString()+" doSaveAs");
 	}
 	/* (non-Javadoc)
 	 * Method declared on IEditorPart
@@ -155,6 +165,7 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 	public void gotoMarker(IMarker marker) {
 		setActivePage(0);
 		IDE.gotoMarker(getEditor(0), marker);
+		Console.log(this.toString()+" gotoMarker");
 	}
 	/**
 	 * The <code>MultiPageEditorExample</code> implementation of this method
@@ -162,6 +173,7 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 	 */
 	public void init(IEditorSite site, IEditorInput editorInput)
 		throws PartInitException {
+		Console.log(this.toString()+" init");
 		if (!(editorInput instanceof IFileEditorInput))
 			throw new PartInitException("Invalid Input: Must be IFileEditorInput");
 		super.init(site, editorInput);
@@ -176,6 +188,7 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 	 * Calculates the contents of page 2 when the it is activated.
 	 */
 	protected void pageChange(int newPageIndex) {
+		Console.log(this.toString()+" pageChange "+newPageIndex);
 		super.pageChange(newPageIndex);
 		if (newPageIndex == 2) {
 			sortWords();
@@ -185,6 +198,7 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 	 * Closes all project files on project close.
 	 */
 	public void resourceChanged(final IResourceChangeEvent event){
+		Console.log(this.toString()+" resourceChanged "+event);
 		if(event.getType() == IResourceChangeEvent.PRE_CLOSE){
 			Display.getDefault().asyncExec(new Runnable(){
 				public void run(){
@@ -203,6 +217,7 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 	 * Sets the font related data to be applied to the text in page 2.
 	 */
 	void setFont() {
+		Console.log(this.toString()+" setFont ");
 		FontDialog fontDialog = new FontDialog(getSite().getShell());
 		fontDialog.setFontList(text.getFont().getFontData());
 		FontData fontData = fontDialog.open();
@@ -217,7 +232,7 @@ public class ScalaPageEditor extends MultiPageEditorPart implements IResourceCha
 	 * Sorts the words in page 0, and shows them in page 2.
 	 */
 	void sortWords() {
-
+		Console.log(this.toString()+" sortWords ");
 		String editorText =
 			editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
 

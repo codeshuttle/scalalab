@@ -7,7 +7,7 @@
       <editor
             name="Scala-page Editor"
             extensions="scala"
-            icon="icons/sample.gif"
+            icon="icons/sample.png"
             contributorClass="scalaplugin.editors.ScalaPageEditorContributor"
             class="scalaplugin.editors.ScalaPageEditor"
             id="scalaplugin.editors.ScalaPageEditor">
@@ -21,11 +21,30 @@
       </category>
       <wizard
             name="Multi-page Editor file"
-            icon="icons/sample.gif"
+            icon="icons/sample.png"
             category="scalaplugin"
             class="scalaplugin.wizards.ScalaNewWizard"
             id="scalaplugin.wizards.ScalaNewWizard">
       </wizard>
    </extension>
-
+ 	<extension point = "org.eclipse.ui.actionSets">
+        <actionSet
+            id="scalaplugin.actions.SbtActionSet"
+            label="Scala Sbt"
+	    visible="true"
+	    description="The action set for the Eclipse Scala sbt shell">
+	    <menu
+		id="scalaplugin.SbtMenu"
+		label="Sbt">
+		<separator name="samples"/>
+	    </menu>
+	    <action id="scalaplugin.actions.SbtAction"
+		menubarPath="scalaplugin.SbtMenu/samples"
+		toolbarPath="Normal"			
+		label="Scala sbt"
+		tooltip="Press to run sbt"
+		icon="icons/sample.png"
+		class="scalaplugin.actions.SbtAction"/>
+        </actionSet>
+    </extension>
 </plugin>
