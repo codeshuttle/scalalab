@@ -13,6 +13,7 @@ import java.util.Stack;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Shell;
@@ -89,8 +90,10 @@ public class SbtAction implements IWorkbenchWindowActionDelegate {
 	public void run(IAction action) {
 		if (!c.isStarted()) {
 			MessageDialog.openInformation(shell, "Scala Sbt", "start thread");
-			shell.open();
+//			shell.open();
 			c.start();
+			error = new Text(shell, SWT.READ_ONLY | SWT.MULTI | SWT.ERROR);
+			message = new Text(shell, SWT.READ_ONLY | SWT.MULTI | SWT.None);
 			message.append("sbt started!");
 			MessageDialog.openInformation(shell, "Scala Sbt", "end thread");
 		} else {
@@ -131,6 +134,8 @@ public class SbtAction implements IWorkbenchWindowActionDelegate {
 		shell.removeKeyListener(listener);
 		error = null;
 		message = null;
+		charEntered.clear();
+		commands.clear();
 	}
 
 	@Override
