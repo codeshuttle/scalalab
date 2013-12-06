@@ -16,6 +16,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -29,13 +30,7 @@ import scalaplugin.Console;
  */
 public class SbtAction implements IWorkbenchWindowActionDelegate {
 
-	// private static final File errorFile = new
-	// File("D:\\ws\\tmp\\log_error.txt");
-	// private static final File messageFile = new
-	// File("D:\\ws\\tmp\\log_info.txt");
-//	private IWorkbenchWindow activeWindow = null;
 	private Shell shell = null;
-	
 	private Text error = null;
 	private Text message = null;
 
@@ -43,21 +38,22 @@ public class SbtAction implements IWorkbenchWindowActionDelegate {
 	private final Stack<String> commands = new Stack<>();
 
 	private final OutputStream errorOut = new OutputStream() {
-		
+
 		@Override
 		public void write(int b) throws IOException {
-			error.append(""+(char)b);
+			showError("" + (char) b);
 		}
 	};
 	private final OutputStream messageOut = new OutputStream() {
-		
+
 		@Override
 		public void write(int b) throws IOException {
-			message.append(""+(char)b);
+			showMessage("" + (char) b);
 		}
 	};
-	private final SbtCommand c = new SbtCommand(errorOut, messageOut);
-	
+	private final CommandRunner c = new CommandRunner(CommandRunner.SBT_BAT,
+			errorOut, messageOut);
+
 	private final KeyListener listener = new KeyListener() {
 
 		@Override
@@ -89,23 +85,43 @@ public class SbtAction implements IWorkbenchWindowActionDelegate {
 	@Override
 	public void run(IAction action) {
 		if (!c.isStarted()) {
-			MessageDialog.openInformation(shell, "Scala Sbt", "start thread");
-//			shell.open();
-			c.start();
-			error = new Text(shell, SWT.READ_ONLY | SWT.MULTI | SWT.ERROR);
-			message = new Text(shell, SWT.READ_ONLY | SWT.MULTI | SWT.None);
-			message.append("sbt started!");
-			MessageDialog.openInformation(shell, "Scala Sbt", "end thread");
+			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					shell = new Shell(Display.getCurrent(), SWT.None );//SWT.None
+					shell.open();
+//					shell.setBackground(org.eclipse.swt.graphics.Color.);
+					MessageDialog.openInformation(shell, "Scala Sbt",
+							"start thread");
+//					error = new Text(shell, SWT.READ_ONLY | SWT.MULTI
+//							| SWT.ERROR);
+					message = new Text(shell, SWT.READ_ONLY | SWT.MULTI
+							| SWT.None);
+					error = message;
+//					error.pack();
+//					message.pack();
+					showMessage("sbt started!");
+					c.start();
+					shell.addKeyListener(listener);
+					MessageDialog.openInformation(shell, "Scala Sbt",
+							"end thread");
+				}
+			});
 		} else {
-			MessageDialog.openInformation(shell, "Scala Sbt", "setActive");
-			shell.setActive();
+			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					MessageDialog.openInformation(shell, "Scala Sbt",
+							"setActive");
+					shell.setActive();
+				}
+			});
 		}
 	}
 
 	private void runCommand() {
 		try {
 			String command = commands.peek() + "\n";
-			c.getOutputStream().write(command.getBytes(Charset.defaultCharset()));
+			c.getOutputStream().write(
+					command.getBytes(Charset.defaultCharset()));
 			Console.log("Executed command '" + command + "'");
 		} catch (IOException e) {
 			c.handleException(e);
@@ -126,21 +142,44 @@ public class SbtAction implements IWorkbenchWindowActionDelegate {
 
 	}
 
+	private void showMessage(final String m) {
+		// Update the user interface asynchronously
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				message.append(m);
+			}
+		});
+	}
+
+	private void showError(final String e) {
+		// Update the user interface asynchronously
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				error.append(e);
+			}
+		});
+	}
+
 	@Override
 	public void dispose() {
-		if (c.isStarted()){
-			c.stop();
-		}
-		shell.removeKeyListener(listener);
-		error = null;
-		message = null;
-		charEntered.clear();
-		commands.clear();
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				if (c.isStarted()) {
+					c.stop();
+				}
+				shell.removeKeyListener(listener);
+				error = null;
+				message = null;
+				shell.dispose();
+				charEntered.clear();
+				commands.clear();
+			}
+		});
 	}
 
 	@Override
 	public void init(IWorkbenchWindow window) {
-		shell = window.getShell();
+//		shell = window.getShell();
 	}
 
 }

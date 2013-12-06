@@ -14,8 +14,12 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-public class SbtCommand {
+public class CommandRunner {
 
+	public static final String SBT_BAT = "D:\\soft\\sbt\\bin\\sbt.bat";
+	public static final String SCALA_BAT = "D:\\soft\\scala-2.11.0-M5\\bin\\scala.bat";
+	
+	private final String cmd;
 	private final OutputStream errorStream;
 	private final OutputStream inputStream;
 	
@@ -25,8 +29,9 @@ public class SbtCommand {
 	private ScheduledExecutorService thread = null;
 	private Process sbtProcess = null;
 	
-	public SbtCommand(OutputStream errorStream, OutputStream inputStream) {
+	public CommandRunner(String command, OutputStream errorStream, OutputStream inputStream) {
 		super();
+		this.cmd = command;
 		this.errorStream = errorStream;
 		this.inputStream = inputStream;
 	}
@@ -42,7 +47,7 @@ public class SbtCommand {
 			try {
 				// refresh(errorFile,messageFile);
 
-				ProcessBuilder pb = new ProcessBuilder("D:\\soft\\sbt\\bin\\sbt.bat");
+				ProcessBuilder pb = new ProcessBuilder(cmd);
 
 				// pb.redirectErrorStream(true);
 				// pb.redirectError(Redirect.appendTo(errorFile));
@@ -156,7 +161,7 @@ public class SbtCommand {
 				System.out.append((char)b);
 			}
 		};
-		final SbtCommand c = new SbtCommand(errorOut, messageOut);
+		final CommandRunner c = new CommandRunner(SCALA_BAT, errorOut, messageOut);
 		c.start();
 		new CountDownLatch(1).await();
 	}
