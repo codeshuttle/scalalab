@@ -3,6 +3,8 @@
  */
 package scalaplugin.actions;
 
+import java.io.File;
+
 
 /**
  * @author parthipanp
@@ -14,12 +16,16 @@ public class SbtAction extends AbstractAction {
 	 * 
 	 */
 	public SbtAction() {
-		super();
+		super("Simple Build Tool");
 	}
 
 	@Override
 	String getAction(){
-		return CommandRunner.SBT_BAT;
+		if(isWindows()){
+			return getSbtHome() + File.pathSeparator + "sbt.bat";
+		}else{
+			return getSbtHome() + File.pathSeparator + "sbt.sh";
+		}
 	}
 
 }

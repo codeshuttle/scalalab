@@ -16,8 +16,8 @@ import java.util.concurrent.TimeUnit;
 
 public class CommandRunner {
 
-	public static final String SBT_BAT = "D:\\soft\\sbt\\bin\\sbt.bat";
-	public static final String SCALA_BAT = "D:\\soft\\scala-2.11.0-M5\\bin\\scala.bat";
+//	public static final String SBT_BAT = "D:\\soft\\sbt\\bin\\sbt.bat";
+//	public static final String SCALA_BAT = "D:\\soft\\scala-2.11.0-M5\\bin\\scala.bat";
 	
 	private final String cmd;
 	private final OutputStream errorStream;
@@ -165,7 +165,7 @@ public class CommandRunner {
 				System.out.append((char)b);
 			}
 		};
-		final CommandRunner c = new CommandRunner(SCALA_BAT, errorOut, messageOut);
+		final CommandRunner c = new CommandRunner("D:\\soft\\sbt\\bin\\sbt.bat", errorOut, messageOut);
 		c.start();
 		new CountDownLatch(1).await();
 	}

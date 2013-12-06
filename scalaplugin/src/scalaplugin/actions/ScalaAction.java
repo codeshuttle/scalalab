@@ -3,6 +3,8 @@
  */
 package scalaplugin.actions;
 
+import java.io.File;
+
 /**
  * @author parthipanp
  *
@@ -13,12 +15,16 @@ public class ScalaAction extends AbstractAction {
 	 * 
 	 */
 	public ScalaAction() {
-		super();
+		super("Scala Interpreter");
 	}
 
 	@Override
 	String getAction() {
-		return CommandRunner.SCALA_BAT;
+		if(isWindows()){
+			return getScalaHome() + File.pathSeparator + "scala.bat";
+		}else{
+			return getScalaHome() + File.pathSeparator + "scala.sh";
+		}
 	}
 	
 }

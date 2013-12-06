@@ -5,7 +5,6 @@ package scalaplugin.actions;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Stack;
@@ -31,7 +30,7 @@ import scalaplugin.Console;
 public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 
 	abstract String getAction();
-	
+
 	private Shell shell = null;
 	private Text error = null;
 	private Text message = null;
@@ -53,15 +52,22 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 			showMessage("" + (char) b);
 		}
 	};
-	private final CommandRunner c = new CommandRunner(getAction(),
-			errorOut, messageOut);
+	private final CommandRunner c = new CommandRunner(getAction(), errorOut,
+			messageOut);
 
 	private final KeyListener listener = new KeyListener() {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
+			try {
+				c.getOutputStream().write(e.keyCode);
+				Console.log("key code '" + e.keyCode + "'");
+			} catch (IOException e1) {
+				c.handleException(e1);
+			}
 			if (e.keyCode == 13) {
-				Character[] arr = (Character[]) charEntered.toArray();
+				Character[] arr = (Character[]) charEntered
+						.toArray(new Character[] {});
 				String command = new String(convert(arr));
 				commands.push(command);
 				charEntered.clear();
@@ -77,11 +83,13 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 		}
 	};
 
+	private final String title;
+
 	/**
 	 * 
 	 */
-	public AbstractAction() {
-		// TODO Auto-generated constructor stub
+	public AbstractAction(String title) {
+		this.title = title;
 	}
 
 	@Override
@@ -89,23 +97,24 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 		if (!c.isStarted()) {
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {
-					shell = new Shell(Display.getCurrent(), SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.MAX | SWT.RESIZE | SWT.SHELL_TRIM );//SWT.None
+					shell = new Shell(Display.getCurrent(), SWT.CLOSE
+							| SWT.TITLE | SWT.MIN | SWT.MAX | SWT.RESIZE
+							| SWT.SHELL_TRIM);// SWT.None
 					shell.open();
-//					shell.setBackground(org.eclipse.swt.graphics.Color.);
-//					MessageDialog.openInformation(shell, "Scala Sbt",
-//							"start thread");
-					error = new Text(shell, SWT.READ_ONLY | SWT.MULTI
-							| SWT.ERROR);
-					message = new Text(shell, SWT.READ_ONLY | SWT.MULTI
-							| SWT.None);
-//					error = message;
+					shell.setText(title);
+					// shell.setBackground(org.eclipse.swt.graphics.Color.);
+					// MessageDialog.openInformation(shell, "Scala Sbt",
+					// "start thread");
+					error = new Text(shell, SWT.MULTI | SWT.ERROR);
+					message = new Text(shell, SWT.MULTI | SWT.None);
+					// error = message;
 					error.pack();
 					message.pack();
-//					showMessage("sbt started!");
+					// showMessage("sbt started!");
 					c.start();
-					shell.addKeyListener(listener);
-//					MessageDialog.openInformation(shell, "Scala Sbt",
-//							"end thread");
+					message.addKeyListener(listener);
+					// MessageDialog.openInformation(shell, "Scala Sbt",
+					// "end thread");
 				}
 			});
 		} else {
@@ -120,14 +129,14 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 	}
 
 	private void runCommand() {
-		try {
-			String command = commands.peek() + "\n";
-			c.getOutputStream().write(
-					command.getBytes(Charset.defaultCharset()));
-			Console.log("Executed command '" + command + "'");
-		} catch (IOException e) {
-			c.handleException(e);
-		}
+		// try {
+		String command = commands.peek() + "\n";
+		// c.getOutputStream().write(
+		// command.getBytes(Charset.defaultCharset()));
+		Console.log("Executed command '" + command + "'");
+		// } catch (IOException e) {
+		// c.handleException(e);
+		// }
 	}
 
 	private char[] convert(Character[] arr) {
@@ -171,7 +180,7 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 				if (c.isStarted()) {
 					c.stop();
 				}
-				shell.removeKeyListener(listener);
+				message.removeKeyListener(listener);
 				error = null;
 				message = null;
 				shell.dispose();
@@ -183,7 +192,35 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 
 	@Override
 	public void init(IWorkbenchWindow window) {
-//		shell = window.getShell();
+		// shell = window.getShell();
 	}
 
+	private static String OS = null;
+
+	static String getOsName() {
+		if (OS == null) {
+			OS = System.getProperty("os.name");
+		}
+		return OS;
+	}
+
+	static boolean isWindows() {
+		return getOsName().startsWith("Windows");
+	}
+	
+	static String getSbtHome(){
+		return getEnvOrSys("SBT_HOME");
+	}
+
+	static String getScalaHome(){
+		return getEnvOrSys("SCALA_HOME");
+	}
+	
+	static String getEnvOrSys(String var){
+		if(System.getProperty(var)!=null){
+			return System.getProperty(var);
+		}else{
+			return System.getenv(var);
+		}
+	}
 }
