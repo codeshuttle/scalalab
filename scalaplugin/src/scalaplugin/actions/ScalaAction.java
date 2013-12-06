@@ -21,9 +21,9 @@ public class ScalaAction extends AbstractAction {
 	@Override
 	String getAction() {
 		if(isWindows()){
-			return getScalaHome() + File.pathSeparator + "scala.bat";
+			return getScalaHome() + File.separator + "bin" + File.separator + "scala.bat";
 		}else{
-			return getScalaHome() + File.pathSeparator + "scala.sh";
+			return getScalaHome() + File.separator + "bin" + File.separator + "scala.sh";
 		}
 	}
 	

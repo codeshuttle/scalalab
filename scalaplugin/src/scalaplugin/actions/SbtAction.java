@@ -22,9 +22,9 @@ public class SbtAction extends AbstractAction {
 	@Override
 	String getAction(){
 		if(isWindows()){
-			return getSbtHome() + File.pathSeparator + "sbt.bat";
+			return getSbtHome() + File.separator + "bin" + File.separator + "sbt.bat";
 		}else{
-			return getSbtHome() + File.pathSeparator + "sbt.sh";
+			return getSbtHome() + File.separator + "bin" + File.separator + "sbt.sh";
 		}
 	}
 
