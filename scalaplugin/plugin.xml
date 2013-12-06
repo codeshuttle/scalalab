@@ -62,7 +62,7 @@
 		menubarPath="scalaplugin.ScalaIMenu/samples"
 		toolbarPath="Normal"			
 		label="Scala Interpreter"
-		tooltip="Press to run scala"
+		tooltip="Press to run scala interpreter"
 		icon="icons/scalaI.jpg"
 		class="scalaplugin.actions.ScalaAction"/>
         </actionSet>

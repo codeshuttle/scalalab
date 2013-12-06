@@ -92,8 +92,8 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 					shell = new Shell(Display.getCurrent(), SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.MAX | SWT.RESIZE | SWT.SHELL_TRIM );//SWT.None
 					shell.open();
 //					shell.setBackground(org.eclipse.swt.graphics.Color.);
-					MessageDialog.openInformation(shell, "Scala Sbt",
-							"start thread");
+//					MessageDialog.openInformation(shell, "Scala Sbt",
+//							"start thread");
 					error = new Text(shell, SWT.READ_ONLY | SWT.MULTI
 							| SWT.ERROR);
 					message = new Text(shell, SWT.READ_ONLY | SWT.MULTI
@@ -101,11 +101,11 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 //					error = message;
 					error.pack();
 					message.pack();
-					showMessage("sbt started!");
+//					showMessage("sbt started!");
 					c.start();
 					shell.addKeyListener(listener);
-					MessageDialog.openInformation(shell, "Scala Sbt",
-							"end thread");
+//					MessageDialog.openInformation(shell, "Scala Sbt",
+//							"end thread");
 				}
 			});
 		} else {
