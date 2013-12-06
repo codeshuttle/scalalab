@@ -43,7 +43,7 @@
 		toolbarPath="Normal"			
 		label="Scala sbt"
 		tooltip="Press to run sbt"
-		icon="icons/sample.png"
+		icon="icons/sbt.jpg"
 		class="scalaplugin.actions.SbtAction"/>
         </actionSet>
     </extension>
@@ -55,7 +55,7 @@
 	    description="The action set for the Eclipse Scala shell">
 	    <menu
 		id="scalaplugin.ScalaIMenu"
-		label="Sbt">
+		label="Scala">
 		<separator name="samples"/>
 	    </menu>
 	    <action id="scalaplugin.actions.ScalaAction"
@@ -63,7 +63,7 @@
 		toolbarPath="Normal"			
 		label="Scala Interpreter"
 		tooltip="Press to run scala"
-		icon="icons/sample.png"
+		icon="icons/scalaI.jpg"
 		class="scalaplugin.actions.ScalaAction"/>
         </actionSet>
     </extension>
