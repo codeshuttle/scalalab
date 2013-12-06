@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Stack;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -52,9 +57,23 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 			showMessage("" + (char) b);
 		}
 	};
-	private final CommandRunner c = new CommandRunner(getAction(), errorOut,
-			messageOut);
+	
+	private CommandRunner getCommandRunner(){
+		IProject[] projects = getProject();
+		if(projects!=null && projects.length>0){
+			IProject project = projects[0];
+			IPath location = project.getLocation();
+			return new CommandRunner(getAction(),location.toFile().getAbsolutePath(), errorOut,
+					messageOut);
+		}else{
+			return new CommandRunner(getAction(),".", errorOut,
+					messageOut);
+		}
 
+	}
+	
+	private CommandRunner c = null;
+	
 	private final KeyListener listener = new KeyListener() {
 
 		@Override
@@ -94,7 +113,8 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 
 	@Override
 	public void run(IAction action) {
-		if (!c.isStarted()) {
+		if (c==null) {
+			c = getCommandRunner();
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {
 					shell = new Shell(Display.getCurrent(), SWT.CLOSE
@@ -186,6 +206,7 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 				shell.dispose();
 				charEntered.clear();
 				commands.clear();
+				c = null;
 			}
 		});
 	}
@@ -222,5 +243,12 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 		}else{
 			return System.getenv(var);
 		}
+	}
+	
+	IProject[] getProject(){
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+        IWorkspaceRoot root = workspace.getRoot();
+        return root.getProjects();
+
 	}
 }
