@@ -144,6 +144,10 @@ public class CommandRunner {
 	public void stop(){
 		scheduleAtFixedRate.cancel(true);
 		thread.shutdownNow();
+		if(sbtProcess!=null){
+			sbtProcess.destroy();
+			sbtProcess = null;
+		}
 	}
 	
 	public static void main(String[] args) throws InterruptedException{

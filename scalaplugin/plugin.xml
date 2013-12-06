@@ -30,9 +30,9 @@
  	<extension point = "org.eclipse.ui.actionSets">
         <actionSet
             id="scalaplugin.actions.SbtActionSet"
-            label="Scala Sbt"
+            label="Run Sbt"
 	    visible="true"
-	    description="The action set for the Eclipse Scala sbt shell">
+	    description="The action set for the Eclipse Sbt shell">
 	    <menu
 		id="scalaplugin.SbtMenu"
 		label="Sbt">
@@ -45,6 +45,26 @@
 		tooltip="Press to run sbt"
 		icon="icons/sample.png"
 		class="scalaplugin.actions.SbtAction"/>
+        </actionSet>
+    </extension>
+    <extension point = "org.eclipse.ui.actionSets">
+        <actionSet
+            id="scalaplugin.actions.ScalaActionSet"
+            label="Run Scala"
+	    visible="true"
+	    description="The action set for the Eclipse Scala shell">
+	    <menu
+		id="scalaplugin.ScalaIMenu"
+		label="Sbt">
+		<separator name="samples"/>
+	    </menu>
+	    <action id="scalaplugin.actions.ScalaAction"
+		menubarPath="scalaplugin.ScalaIMenu/samples"
+		toolbarPath="Normal"			
+		label="Scala Interpreter"
+		tooltip="Press to run scala"
+		icon="icons/sample.png"
+		class="scalaplugin.actions.ScalaAction"/>
         </actionSet>
     </extension>
 </plugin>
