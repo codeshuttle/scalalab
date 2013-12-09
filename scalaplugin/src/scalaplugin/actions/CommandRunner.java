@@ -22,39 +22,58 @@ public class CommandRunner {
 //	public static final String SBT_BAT = "D:\\soft\\sbt\\bin\\sbt.bat";
 //	public static final String SCALA_BAT = "D:\\soft\\scala-2.11.0-M5\\bin\\scala.bat";
 	
-	private final String cmd;
+	private final String[] cmd;
 	private final File baseDir;
-	private final OutputStream errorStream;
-	private final OutputStream inputStream;
+	private final Writer errorWriter;
+	private final Writer inputWriter;
 	
 	private ScheduledFuture<?> scheduleAtFixedRate = null;
-	private final ExecutorService service = Executors.newSingleThreadExecutor();
-	
+	private ExecutorService service = null;
 	private ScheduledExecutorService thread = null;
+	
 	private Process sbtProcess = null;
 	
-	public CommandRunner(String command,String baseDir, OutputStream errorStream, OutputStream inputStream) {
+	public CommandRunner(String[] command,String baseDir, Writer errorWriter, Writer inputWriter) {
 		super();
 		this.cmd = command;
 		this.baseDir = new File(baseDir);
-		this.errorStream = errorStream;
-		this.inputStream = inputStream;
+		this.errorWriter = errorWriter;
+		this.inputWriter = inputWriter;
 	}
 	
-	public OutputStream getOutputStream() {
-		return sbtProcess.getOutputStream();
+	public void run(String command){
+		try {
+			OutputStream outputStream = sbtProcess.getOutputStream();
+			outputStream.write(command.getBytes("UTF-8"));
+			outputStream.flush();
+			Console.log("Executed command '" + command + "'");
+		} catch (IOException e) {
+			handleException(e);
+		}
 	}
-
+	
+	private volatile boolean running = false;
+	
 	private final Runnable initializer = new Runnable() {
 		
 		@Override
 		public void run() {
 			try {
 				// refresh(errorFile,messageFile);
-
+				
 				ProcessBuilder pb = new ProcessBuilder(cmd);
 				pb.directory(baseDir);
-				Console.log("running command at directory "+baseDir.getAbsolutePath());
+//				pb.environment().putAll(System.getenv());
+				
+//				Map<String, String> environment = pb.environment();
+				
+//				for(Entry<String, String> e:environment.entrySet()){
+//					Console.log(e.getKey()+"="+e.getValue());
+//				}
+				
+//				   env.putAll(environment);
+				
+//				Console.log("running command at directory "+baseDir.getAbsolutePath());
 				// pb.redirectErrorStream(true);
 				// pb.redirectError(Redirect.appendTo(errorFile));
 				// pb.redirectOutput(Redirect.appendTo(messageFile));
@@ -75,7 +94,7 @@ public class CommandRunner {
 				// StandardWatchEventKinds.ENTRY_MODIFY);
 
 				sbtProcess = pb.start();
-
+				
 				thread = Executors.newScheduledThreadPool(1);
 				
 				readMap.put(sbtProcess.getErrorStream(), 0l);
@@ -85,93 +104,137 @@ public class CommandRunner {
 						new Runnable() {
 							@Override
 							public void run() {
+								if(running) return;
 								try {
-//									System.out.println("Write response from Thread!");
-									pipe(sbtProcess.getErrorStream(),errorStream);
-									pipe(sbtProcess.getInputStream(),inputStream);
+									running = true;
+//									Console.log("Write response from Thread error!");
+									pipe(sbtProcess.getErrorStream(),errorWriter);
+//									Console.log("Write response from Thread message!");
+									pipe(sbtProcess.getInputStream(),inputWriter);
 								} catch (IOException e) {
 									handleException(e);
+								}finally{
+									running = false;
 								}
 							}
-						}, 5, 5, TimeUnit.SECONDS);
-
-			} catch (IOException e) {
+						}, 1, 1, TimeUnit.SECONDS);
+				
+				sbtProcess.waitFor();
+				
+			} catch (Exception e) {
 				handleException(e);
-				sbtProcess = null;
+//				sbtProcess = null;
 			}finally{
-				service.shutdownNow();
+//				service.shutdownNow();
 			}
 		}
 	};
 	
 	
-	private boolean started = false;
 	public void start(){
-		started = true;
+		service = Executors.newSingleThreadExecutor();
 		service.submit(initializer);
 	}
 	
 	public boolean isStarted(){
-		return started;
+		return service!=null;
 	}
 
-	public void handleException(IOException e) {
+	public void handleException(Exception e) {
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
-		try {
-			errorStream.write(sw.toString().getBytes());
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		Console.error(sw.toString());
+//		try {
+			errorWriter.write(sw.toString());
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
 	}
 	
 	private final Map<InputStream,Long> readMap = new HashMap<>(2);
 	
-	private void pipe(InputStream in,OutputStream out) throws IOException {
+	private void pipe(InputStream in,Writer out) throws IOException {
 		long skip = readMap.remove(in).longValue();
-		//System.out.println("pipe skip "+skip);
+		final long startSkip = skip;
+//		Console.log("pipe skip "+skip);
 		if(skip>0){
 			in.skip(skip);
 		}
-		
-		if(in.available() > 0){
+		final StringBuffer content = new StringBuffer();
+		final int available = in.available();
+//		Console.log("read available "+available+" skip "+skip);
+		if(available > 0){
 			while( true ){
 				int read = in.read();
-				//System.out.println("read "+read);
-				if(read==-1) break;
-				
-				skip =+ 1;
-				out.write(read);
+//				Console.log("read int "+read+" skip "+skip);
+				if(read==-1||skip==startSkip+available-1)  break;	
+
+				skip++;
+				content.append((char)read);
+//				Console.log("read content "+content.toString());
+//				out.write(read);
 			}
+		}
+		if(content.length()>0){
+//			Console.log("write "+content.toString());
+			out.write(content.toString());
 		}
 		readMap.put(in, skip);
 	}
 	
 	public void stop(){
-		scheduleAtFixedRate.cancel(true);
-		thread.shutdownNow();
 		if(sbtProcess!=null){
+			if(this.cmd[0].indexOf("scala")!=-1){
+				run(":q\n");
+			}else{
+				run("exit\n");
+			}
 			sbtProcess.destroy();
 			sbtProcess = null;
+		}
+		if (scheduleAtFixedRate!=null) {
+			scheduleAtFixedRate.cancel(true);
+		}
+		if (thread!=null) {
+			thread.shutdownNow();
+			thread = null;
+		}
+		if (service!=null) {
+			service.shutdownNow();
+			service = null;
 		}
 	}
 	
 	public static void main(String[] args) throws InterruptedException{
-		final OutputStream errorOut = new OutputStream() {
+		final Writer errorOut = new Writer() {
 			
 			@Override
-			public void write(int b) throws IOException {
-				System.err.append((char)b);
+			public void write(String b) {
+				System.err.append(b);
 			}
 		};
-		final OutputStream messageOut = new OutputStream() {
+		final Writer messageOut = new Writer() {
 			
 			@Override
-			public void write(int b) throws IOException {
-				System.out.append((char)b);
+			public void write(String b){
+				System.out.append(b);
 			}
 		};
-		final CommandRunner c = new CommandRunner("D:\\soft\\sbt\\bin\\sbt.bat",".", errorOut, messageOut);
+		String separator = File.separator;
+		
+		String [] cmd = new String[]{
+			AbstractAction.getJavaHome() + separator + "bin" +  separator + "java.exe",
+			"-Xmx512m", 
+			"-XX:MaxPermSize=256m",
+			"-XX:ReservedCodeCacheSize=128m",
+			"-Dsbt.log.format=true",
+			"-cp",
+			""+AbstractAction.getSbtHome() + File.separator + "bin" + File.separator + "sbt-launch.jar;"+System.getProperty("java.class.path"),
+			"xsbt.boot.Boot"
+		};
+		
+//		String cmd = AbstractAction.getJavaHome() + separator + "bin" +  separator + "java.exe  -Xmx512M -XX:MaxPermSize=256m -XX:ReservedCodeCacheSize=128m -Dsbt.log.format=true  -jar "+AbstractAction.getSbtHome() + separator + "bin" + separator + "sbt-launch.jar";
+		final CommandRunner c = new CommandRunner(cmd,".", errorOut, messageOut);
 		c.start();
 		new CountDownLatch(1).await();
 	}

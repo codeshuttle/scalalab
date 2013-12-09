@@ -3,8 +3,6 @@
  */
 package scalaplugin.actions;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Stack;
@@ -15,14 +13,16 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 
@@ -34,27 +34,28 @@ import scalaplugin.Console;
  */
 public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 
-	abstract String getAction();
+	public static final Collection<AbstractAction> actions = new ArrayList<>(2);
+	
+	abstract String[] getAction();
 
 	private Shell shell = null;
-	private Text error = null;
-	private Text message = null;
+	private StyledText message = null;
 
-	private final Collection<Character> charEntered = new ArrayList<>();
+	private final Stack<Character> charEntered = new Stack<>();
 	private final Stack<String> commands = new Stack<>();
 
-	private final OutputStream errorOut = new OutputStream() {
+	private final Writer errorOut = new Writer() {
 
 		@Override
-		public void write(int b) throws IOException {
-			showError("" + (char) b);
+		public void write(String b) {
+			showError(b);
 		}
 	};
-	private final OutputStream messageOut = new OutputStream() {
+	private final Writer messageOut = new Writer() {
 
 		@Override
-		public void write(int b) throws IOException {
-			showMessage("" + (char) b);
+		public void write(String b) {
+			showMessage(b, SWT.COLOR_BLUE);
 		}
 	};
 	
@@ -78,13 +79,11 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			try {
-				c.getOutputStream().write(e.keyCode);
-				Console.log("key code '" + e.keyCode + "'");
-			} catch (IOException e1) {
-				c.handleException(e1);
-			}
-			if (e.keyCode == 13) {
+//			Console.log("key code '" + e.keyCode + "'");
+			showMessage(""+e.character, SWT.COLOR_WHITE);
+			if (e.keyCode == 8 && !charEntered.isEmpty()) {
+				charEntered.pop();
+			}else if (e.keyCode == 13) {
 				Character[] arr = (Character[]) charEntered
 						.toArray(new Character[] {});
 				String command = new String(convert(arr));
@@ -92,7 +91,7 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 				charEntered.clear();
 				runCommand();
 			} else {
-				charEntered.add(e.character);
+				charEntered.push(e.character);
 			}
 		}
 
@@ -109,6 +108,7 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 	 */
 	public AbstractAction(String title) {
 		this.title = title;
+		actions.add(this);
 	}
 
 	@Override
@@ -117,31 +117,29 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 			c = getCommandRunner();
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {
-					shell = new Shell(Display.getCurrent(), SWT.CLOSE
-							| SWT.TITLE | SWT.MIN | SWT.MAX | SWT.RESIZE
-							| SWT.SHELL_TRIM);// SWT.None
-					shell.open();
-					shell.setText(title);
-					// shell.setBackground(org.eclipse.swt.graphics.Color.);
-					// MessageDialog.openInformation(shell, "Scala Sbt",
-					// "start thread");
-					error = new Text(shell, SWT.MULTI | SWT.ERROR);
-					message = new Text(shell, SWT.MULTI | SWT.None);
-					// error = message;
-					error.pack();
-					message.pack();
-					// showMessage("sbt started!");
-					c.start();
-					message.addKeyListener(listener);
-					// MessageDialog.openInformation(shell, "Scala Sbt",
-					// "end thread");
+					try {
+						Display display = Display.getCurrent();
+						shell = new Shell(display, SWT.CLOSE
+								| SWT.TITLE | SWT.MIN | SWT.MAX | SWT.RESIZE
+								| SWT.SHELL_TRIM);// SWT.None
+						shell.setLayout(new FillLayout());
+						shell.setSize(500, 500);
+						shell.open();
+						shell.setText(title);
+						message = new StyledText(shell, SWT.BORDER|SWT.MULTI);
+						message.setSize(500, 500);
+						Color black = new Color(display, 10, 10, 10);
+						message.setBackground(black);
+						c.start();
+						message.addKeyListener(listener);
+					} catch (Throwable e) {
+						Console.error(e);
+					}
 				}
 			});
 		} else {
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {
-					MessageDialog.openInformation(shell, "Scala Sbt",
-							"setActive");
 					shell.setActive();
 				}
 			});
@@ -149,14 +147,8 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 	}
 
 	private void runCommand() {
-		// try {
-		String command = commands.peek() + "\n";
-		// c.getOutputStream().write(
-		// command.getBytes(Charset.defaultCharset()));
-		Console.log("Executed command '" + command + "'");
-		// } catch (IOException e) {
-		// c.handleException(e);
-		// }
+		 String command = commands.peek() + "\n";
+		 c.run(command);
 	}
 
 	private char[] convert(Character[] arr) {
@@ -173,22 +165,18 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 
 	}
 
-	private void showMessage(final String m) {
-		// Update the user interface asynchronously
+	private void showMessage(final String textToAppend,final int textColor) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				message.append(m);
-				message.pack();
+				setMessage(textToAppend, textColor, SWT.NORMAL);
 			}
 		});
 	}
 
-	private void showError(final String e) {
-		// Update the user interface asynchronously
+	private void showError(final String textToAppend) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				error.append(e);
-				error.pack();
+				setMessage(textToAppend, SWT.COLOR_RED, SWT.ITALIC);
 			}
 		});
 	}
@@ -197,16 +185,19 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 	public void dispose() {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				if (c.isStarted()) {
-					c.stop();
+				try {
+					if (c!=null) {
+						c.stop();
+					}
+					message.removeKeyListener(listener);
+					message = null;
+					shell.dispose();
+					charEntered.clear();
+					commands.clear();
+					c = null;
+				} catch (Throwable e) {
+					Console.error(e);
 				}
-				message.removeKeyListener(listener);
-				error = null;
-				message = null;
-				shell.dispose();
-				charEntered.clear();
-				commands.clear();
-				c = null;
 			}
 		});
 	}
@@ -227,6 +218,10 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 
 	static boolean isWindows() {
 		return getOsName().startsWith("Windows");
+	}
+
+	static String getJavaHome(){
+		return getEnvOrSys("JAVA_HOME");
 	}
 	
 	static String getSbtHome(){
@@ -250,5 +245,20 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
         IWorkspaceRoot root = workspace.getRoot();
         return root.getProjects();
 
+	}
+
+	private void setMessage(final String textToAppend, final int textColor, int fontStyle) {
+		try {
+			StyleRange styleRange = new StyleRange();
+			styleRange.start = message.getCharCount();
+			styleRange.length = textToAppend.length();
+			styleRange.fontStyle = fontStyle;
+			styleRange.foreground = Display.getDefault().getSystemColor(textColor);
+			message.append(textToAppend);
+			message.setStyleRange(styleRange);
+//			Console.log(textToAppend);
+		} catch (Throwable e) {
+			Console.error(e);
+		}
 	}
 }

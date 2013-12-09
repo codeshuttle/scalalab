@@ -1,4 +1,4 @@
-[0m[[0minfo[0m] [0mUpdating {file:/D:/ws/sample1/}sample1...[0m
+[0m[[0minfo[0m] [0mUpdating {file:/C:/Users/Parthi/Documents/GitHub/scalalab/sample1/}sample1...[0m
 [0m[[0mdebug[0m] [0m:: resolving dependencies :: default#sample1_2.9.1;0.1[0m
 [0m[[0mdebug[0m] [0m	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool][0m
 [0m[[0mdebug[0m] [0m	validate = true[0m
@@ -7,7 +7,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#sample1_2.9.1;0.1 [compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sample1_2.9.1;0.1->org.scala-lang#scala-library;2.9.1 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.9.1 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@57e00dd[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@666da498[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.9.1[0m
 [0m[[0mdebug[0m] [0m	local: revision in cache: org.scala-lang#scala-library;2.9.1[0m
 [0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.9.1 in sbt-chain[0m
@@ -17,42 +17,17 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sample1_2.9.1;0.1->com.typesafe.akka#akka-actor;2.0 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving com.typesafe.akka#akka-actor;2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.typesafe.akka#akka-actor;2.0 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\com.typesafe.akka\akka-actor\2.0\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.typesafe.akka#akka-actor;2.0[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.pom[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo1.maven.org/maven2/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: no ivy file found for com.typesafe.akka#akka-actor;2.0[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.pom[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: found md file for com.typesafe.akka#akka-actor;2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.pom (2.0)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.pom[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.typesafe.akka#akka-actor;2.0!akka-actor.pom(pom.original) (1299ms)[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\com.typesafe.akka\akka-actor\2.0\jars\akka-actor.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo1.maven.org/maven2/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.jar[0m
-[0m[[0mdebug[0m] [0m	found com.typesafe.akka#akka-actor;2.0 in Typesafe Repository[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.typesafe.akka#akka-actor;2.0[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.typesafe.akka#akka-actor;2.0[0m
+[0m[[0mdebug[0m] [0m	found com.typesafe.akka#akka-actor;2.0 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sample1_2.9.1;0.1->com.typesafe.akka#akka-actor;2.0 [compile->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sample1_2.9.1;0.1->com.typesafe.akka#akka-actor;2.0 [compile->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-actor;2.0->org.scala-lang#scala-library;2.9.1-1 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.9.1-1 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scala-lang#scala-library;2.9.1-1 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.scala-lang\scala-library\2.9.1-1\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.scala-lang#scala-library;2.9.1-1[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.scala-lang#scala-library;2.9.1-1[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.pom (2.9.1-1)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-library;2.9.1-1!scala-library.pom(pom.original) (1670ms)[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.scala-lang\scala-library\2.9.1-1\jars\scala-library.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.jar[0m
-[0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.9.1-1 in public[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.9.1-1[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: org.scala-lang#scala-library;2.9.1-1[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.9.1-1 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-actor;2.0->org.scala-lang#scala-library;2.9.1-1 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-actor;2.0->org.scala-lang#scala-library;2.9.1-1 [compile->default(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-actor;2.0->org.scala-lang#scala-library;2.9.1-1 [compile->runtime][0m
@@ -66,24 +41,9 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sample1_2.9.1;0.1->com.typesafe.akka#akka-remote;2.0 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving com.typesafe.akka#akka-remote;2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.typesafe.akka#akka-remote;2.0 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\com.typesafe.akka\akka-remote\2.0\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for com.typesafe.akka#akka-remote;2.0[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.pom[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo1.maven.org/maven2/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: no ivy file found for com.typesafe.akka#akka-remote;2.0[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.pom[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: found md file for com.typesafe.akka#akka-remote;2.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.pom (2.0)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.pom[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.typesafe.akka#akka-remote;2.0!akka-remote.pom(pom.original) (1158ms)[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\com.typesafe.akka\akka-remote\2.0\jars\akka-remote.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo1.maven.org/maven2/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.jar[0m
-[0m[[0mdebug[0m] [0m	found com.typesafe.akka#akka-remote;2.0 in Typesafe Repository[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.typesafe.akka#akka-remote;2.0[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: com.typesafe.akka#akka-remote;2.0[0m
+[0m[[0mdebug[0m] [0m	found com.typesafe.akka#akka-remote;2.0 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sample1_2.9.1;0.1->com.typesafe.akka#akka-remote;2.0 [compile->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sample1_2.9.1;0.1->com.typesafe.akka#akka-remote;2.0 [compile->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-remote;2.0->com.typesafe.akka#akka-actor;2.0 [compile->master(*)][0m
@@ -93,23 +53,9 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-remote;2.0->io.netty#netty;3.3.0.Final [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving io.netty#netty;3.3.0.Final ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: io.netty#netty;3.3.0.Final {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\io.netty\netty\3.3.0.Final\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for io.netty#netty;3.3.0.Final[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for io.netty#netty;3.3.0.Final[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.pom (3.3.0.Final)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] io.netty#netty;3.3.0.Final!netty.pom(pom.original) (1769ms)[0m
-[0m[[0minfo[0m] [0mResolving org.sonatype.oss#oss-parent;7 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.sonatype.oss#oss-parent;7 {}[0m
-[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.sonatype.oss#oss-parent;7[0m
-[0m[[0mdebug[0m] [0m	local: revision in cache: org.sonatype.oss#oss-parent;7[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\io.netty\netty\3.3.0.Final\bundles\netty.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.jar[0m
-[0m[[0mdebug[0m] [0m	found io.netty#netty;3.3.0.Final in public[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: io.netty#netty;3.3.0.Final[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: io.netty#netty;3.3.0.Final[0m
+[0m[[0mdebug[0m] [0m	found io.netty#netty;3.3.0.Final in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-remote;2.0->io.netty#netty;3.3.0.Final [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-remote;2.0->com.google.protobuf#protobuf-java;2.4.1 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving com.google.protobuf#protobuf-java;2.4.1 ...[0m
@@ -121,36 +67,16 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-remote;2.0->net.debasishg#sjson_2.9.1;0.15 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving net.debasishg#sjson_2.9.1;0.15 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: net.debasishg#sjson_2.9.1;0.15 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\net.debasishg\sjson_2.9.1\0.15\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for net.debasishg#sjson_2.9.1;0.15[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for net.debasishg#sjson_2.9.1;0.15[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.pom (0.15)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] net.debasishg#sjson_2.9.1;0.15!sjson_2.9.1.pom(pom.original) (1213ms)[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\net.debasishg\sjson_2.9.1\0.15\jars\sjson_2.9.1.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.jar[0m
-[0m[[0mdebug[0m] [0m	found net.debasishg#sjson_2.9.1;0.15 in public[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: net.debasishg#sjson_2.9.1;0.15[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: net.debasishg#sjson_2.9.1;0.15[0m
+[0m[[0mdebug[0m] [0m	found net.debasishg#sjson_2.9.1;0.15 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-remote;2.0->net.debasishg#sjson_2.9.1;0.15 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies net.debasishg#sjson_2.9.1;0.15->net.databinder#dispatch-json_2.9.1;0.8.5 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving net.databinder#dispatch-json_2.9.1;0.8.5 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: net.databinder#dispatch-json_2.9.1;0.8.5 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\net.databinder\dispatch-json_2.9.1\0.8.5\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for net.databinder#dispatch-json_2.9.1;0.8.5[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for net.databinder#dispatch-json_2.9.1;0.8.5[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.pom (0.8.5)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] net.databinder#dispatch-json_2.9.1;0.8.5!dispatch-json_2.9.1.pom(pom.original) (1064ms)[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\net.databinder\dispatch-json_2.9.1\0.8.5\jars\dispatch-json_2.9.1.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.jar[0m
-[0m[[0mdebug[0m] [0m	found net.databinder#dispatch-json_2.9.1;0.8.5 in public[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: net.databinder#dispatch-json_2.9.1;0.8.5[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: net.databinder#dispatch-json_2.9.1;0.8.5[0m
+[0m[[0mdebug[0m] [0m	found net.databinder#dispatch-json_2.9.1;0.8.5 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies net.debasishg#sjson_2.9.1;0.15->net.databinder#dispatch-json_2.9.1;0.8.5 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies net.databinder#dispatch-json_2.9.1;0.8.5->org.scala-lang#scala-library;2.9.1 [compile->master(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies net.databinder#dispatch-json_2.9.1;0.8.5->org.scala-lang#scala-library;2.9.1-1 [compile->master(*)][0m
@@ -159,78 +85,16 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies net.databinder#dispatch-json_2.9.1;0.8.5->org.apache.httpcomponents#httpclient;4.1 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving org.apache.httpcomponents#httpclient;4.1 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.httpcomponents#httpclient;4.1 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.apache.httpcomponents\httpclient\4.1\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.apache.httpcomponents#httpclient;4.1[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.apache.httpcomponents#httpclient;4.1[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.pom (4.1)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.httpcomponents#httpclient;4.1!httpclient.pom(pom.original) (1128ms)[0m
-[0m[[0minfo[0m] [0mResolving org.apache.httpcomponents#httpcomponents-client;4.1 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.httpcomponents#httpcomponents-client;4.1 {}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.apache.httpcomponents\httpcomponents-client\4.1\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.apache.httpcomponents#httpcomponents-client;4.1[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.apache.httpcomponents#httpcomponents-client;4.1[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.pom (4.1)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.httpcomponents#httpcomponents-client;4.1!httpcomponents-client.pom(pom.original) (1066ms)[0m
-[0m[[0minfo[0m] [0mResolving org.apache.httpcomponents#project;4.1.1 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.httpcomponents#project;4.1.1 {}[0m
-[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.httpcomponents#project;4.1.1[0m
-[0m[[0mdebug[0m] [0m	local: revision in cache: org.apache.httpcomponents#project;4.1.1[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.apache.httpcomponents\httpcomponents-client\4.1\jars\httpcomponents-client.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo.typesafe.com/typesafe/releases/org/apache/httpcomponents/httpcomponents-client/4.1/httpcomponents-client-4.1.jar[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.apache.httpcomponents\httpclient\4.1\jars\httpclient.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.jar[0m
-[0m[[0mdebug[0m] [0m	found org.apache.httpcomponents#httpclient;4.1 in public[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.httpcomponents#httpclient;4.1[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: org.apache.httpcomponents#httpclient;4.1[0m
+[0m[[0mdebug[0m] [0m	found org.apache.httpcomponents#httpclient;4.1 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies net.databinder#dispatch-json_2.9.1;0.8.5->org.apache.httpcomponents#httpclient;4.1 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.apache.httpcomponents#httpclient;4.1->org.apache.httpcomponents#httpcore;4.1 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving org.apache.httpcomponents#httpcore;4.1 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.httpcomponents#httpcore;4.1 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.apache.httpcomponents\httpcore\4.1\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.apache.httpcomponents#httpcore;4.1[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.apache.httpcomponents#httpcore;4.1[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.pom (4.1)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.httpcomponents#httpcore;4.1!httpcore.pom(pom.original) (1056ms)[0m
-[0m[[0minfo[0m] [0mResolving org.apache.httpcomponents#httpcomponents-core;4.1 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.httpcomponents#httpcomponents-core;4.1 {}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.apache.httpcomponents\httpcomponents-core\4.1\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.apache.httpcomponents#httpcomponents-core;4.1[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.apache.httpcomponents#httpcomponents-core;4.1[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.pom (4.1)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.httpcomponents#httpcomponents-core;4.1!httpcomponents-core.pom(pom.original) (1056ms)[0m
-[0m[[0minfo[0m] [0mResolving org.apache.httpcomponents#project;4.1.1 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.httpcomponents#project;4.1.1 {}[0m
-[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.httpcomponents#project;4.1.1[0m
-[0m[[0mdebug[0m] [0m	local: revision in cache: org.apache.httpcomponents#project;4.1.1[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.apache.httpcomponents\httpcomponents-core\4.1\jars\httpcomponents-core.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo.typesafe.com/typesafe/releases/org/apache/httpcomponents/httpcomponents-core/4.1/httpcomponents-core-4.1.jar[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.apache.httpcomponents\httpcore\4.1\jars\httpcore.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar[0m
-[0m[[0mdebug[0m] [0m	found org.apache.httpcomponents#httpcore;4.1 in public[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache.httpcomponents#httpcore;4.1[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: org.apache.httpcomponents#httpcore;4.1[0m
+[0m[[0mdebug[0m] [0m	found org.apache.httpcomponents#httpcore;4.1 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.apache.httpcomponents#httpclient;4.1->org.apache.httpcomponents#httpcore;4.1 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.apache.httpcomponents#httpclient;4.1->commons-logging#commons-logging;1.1.1 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving commons-logging#commons-logging;1.1.1 ...[0m
@@ -256,40 +120,9 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies net.debasishg#sjson_2.9.1;0.15->commons-io#commons-io;1.4 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving commons-io#commons-io;1.4 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: commons-io#commons-io;1.4 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\commons-io\commons-io\1.4\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for commons-io#commons-io;1.4[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for commons-io#commons-io;1.4[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.pom (1.4)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] commons-io#commons-io;1.4!commons-io.pom(pom.original) (1114ms)[0m
-[0m[[0minfo[0m] [0mResolving org.apache.commons#commons-parent;7 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache.commons#commons-parent;7 {}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.apache.commons\commons-parent\7\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.apache.commons#commons-parent;7[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/commons/commons-parent/7/commons-parent-7.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.apache.commons#commons-parent;7[0m
-[0m[[0mdebug[0m] [0m		=> http://repo1.maven.org/maven2/org/apache/commons/commons-parent/7/commons-parent-7.pom (7)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo1.maven.org/maven2/org/apache/commons/commons-parent/7/commons-parent-7.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/commons/commons-parent/7/commons-parent-7.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/commons/commons-parent/7/commons-parent-7.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/apache/commons/commons-parent/7/commons-parent-7.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.apache.commons#commons-parent;7!commons-parent.pom(pom.original) (1333ms)[0m
-[0m[[0minfo[0m] [0mResolving org.apache#apache;4 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.apache#apache;4 {}[0m
-[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.apache#apache;4[0m
-[0m[[0mdebug[0m] [0m	local: revision in cache: org.apache#apache;4[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\org.apache.commons\commons-parent\7\jars\commons-parent.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/commons/commons-parent/7/commons-parent-7.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo1.maven.org/maven2/org/apache/commons/commons-parent/7/commons-parent-7.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/org/apache/commons/commons-parent/7/commons-parent-7.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo.typesafe.com/typesafe/releases/org/apache/commons/commons-parent/7/commons-parent-7.jar[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\commons-io\commons-io\1.4\jars\commons-io.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.jar[0m
-[0m[[0mdebug[0m] [0m	found commons-io#commons-io;1.4 in public[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: commons-io#commons-io;1.4[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: commons-io#commons-io;1.4[0m
+[0m[[0mdebug[0m] [0m	found commons-io#commons-io;1.4 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies net.debasishg#sjson_2.9.1;0.15->commons-io#commons-io;1.4 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies net.debasishg#sjson_2.9.1;0.15->org.scala-lang#scala-library;2.9.1 [compile->master(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies net.debasishg#sjson_2.9.1;0.15->org.scala-lang#scala-library;2.9.1-1 [compile->master(*)][0m
@@ -320,24 +153,9 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-remote;2.0->voldemort.store.compress#h2-lzf;1.0 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving voldemort.store.compress#h2-lzf;1.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: voldemort.store.compress#h2-lzf;1.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\voldemort.store.compress\h2-lzf\1.0\ivys\ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for voldemort.store.compress#h2-lzf;1.0[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.pom[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo1.maven.org/maven2/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.pom[0m
-[0m[[0mdebug[0m] [0m	public: no ivy file found for voldemort.store.compress#h2-lzf;1.0[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.pom[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: found md file for voldemort.store.compress#h2-lzf;1.0[0m
-[0m[[0mdebug[0m] [0m		=> http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.pom (1.0)[0m
-[0m[[0mdebug[0m] [0mdownloading http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.pom ...[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.pom[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] voldemort.store.compress#h2-lzf;1.0!h2-lzf.pom(pom.original) (1236ms)[0m
-[0m[[0mdebug[0m] [0m		tried C:\Users\Parthi\.ivy2\local\voldemort.store.compress\h2-lzf\1.0\jars\h2-lzf.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=http://repo1.maven.org/maven2/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.jar[0m
-[0m[[0mdebug[0m] [0m	found voldemort.store.compress#h2-lzf;1.0 in Typesafe Repository[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: voldemort.store.compress#h2-lzf;1.0[0m
+[0m[[0mdebug[0m] [0m	local: revision in cache: voldemort.store.compress#h2-lzf;1.0[0m
+[0m[[0mdebug[0m] [0m	found voldemort.store.compress#h2-lzf;1.0 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-remote;2.0->voldemort.store.compress#h2-lzf;1.0 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-remote;2.0->voldemort.store.compress#h2-lzf;1.0 [compile->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.typesafe.akka#akka-remote;2.0->voldemort.store.compress#h2-lzf;1.0 [compile->compile][0m
@@ -840,89 +658,39 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sample1_2.9.1;0.1->org.scala-lang#scala-library;2.9.1 [scala-tool->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sample1_2.9.1;0.1->org.scala-lang#scala-library;2.9.1 [scala-tool->master][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sample1_2.9.1;0.1->org.scala-lang#scala-library;2.9.1 [scala-tool->optional(default)][0m
-[0m[[0mdebug[0m] [0m	resolved ivy file produced in D:\ws\sample1\target\resolution-cache\default\sample1_2.9.1\0.1\resolved.xml.xml[0m
+[0m[[0mdebug[0m] [0m	resolved ivy file produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\default\sample1_2.9.1\0.1\resolved.xml.xml[0m
 [0m[[0mdebug[0m] [0m:: downloading artifacts ::[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-library;2.9.1!scala-library.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.jar[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-actor/2.0/akka-actor-2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.typesafe.akka#akka-actor;2.0!akka-actor.jar (4534ms)[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.jar[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo.typesafe.com/typesafe/releases/com/typesafe/akka/akka-remote/2.0/akka-remote-2.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.typesafe.akka#akka-remote;2.0!akka-remote.jar (3552ms)[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.jar[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.9.1-1/scala-library-2.9.1-1.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-library;2.9.1-1!scala-library.jar (15959ms)[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.jar[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/io/netty/netty/3.3.0.Final/netty-3.3.0.Final.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] io.netty#netty;3.3.0.Final!netty.jar(bundle) (2463ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.typesafe.akka#akka-actor;2.0!akka-actor.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.typesafe.akka#akka-remote;2.0!akka-remote.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-library;2.9.1-1!scala-library.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] io.netty#netty;3.3.0.Final!netty.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.google.protobuf#protobuf-java;2.4.1!protobuf-java.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.jar[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/debasishg/sjson_2.9.1/0.15/sjson_2.9.1-0.15.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] net.debasishg#sjson_2.9.1;0.15!sjson_2.9.1.jar (1426ms)[0m
-[0m[[0mdebug[0m] [0m		tried http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.jar ...[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.jar[0m
-[0m[[0mdebug[0m] [0m	Typesafe Repository: downloading http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo.typesafe.com/typesafe/releases/voldemort/store/compress/h2-lzf/1.0/h2-lzf-1.0.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] voldemort.store.compress#h2-lzf;1.0!h2-lzf.jar (1748ms)[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.jar[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/net/databinder/dispatch-json_2.9.1/0.8.5/dispatch-json_2.9.1-0.8.5.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] net.databinder#dispatch-json_2.9.1;0.8.5!dispatch-json_2.9.1.jar (1217ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] net.debasishg#sjson_2.9.1;0.15!sjson_2.9.1.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] voldemort.store.compress#h2-lzf;1.0!h2-lzf.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] net.databinder#dispatch-json_2.9.1;0.8.5!dispatch-json_2.9.1.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.objenesis#objenesis;1.2!objenesis.jar[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.jar[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] commons-io#commons-io;1.4!commons-io.jar (1135ms)[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.jar[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1/httpclient-4.1.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.apache.httpcomponents#httpclient;4.1!httpclient.jar (1956ms)[0m
-[0m[[0mdebug[0m] [0m		tried http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar[0m
-[0m[[0minfo[0m] [0mdownloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar[0m
-[0m[[0mdebug[0m] [0m	public: downloading http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for http://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.apache.httpcomponents#httpcore;4.1!httpcore.jar (1711ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-io#commons-io;1.4!commons-io.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.apache.httpcomponents#httpclient;4.1!httpclient.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.apache.httpcomponents#httpcore;4.1!httpcore.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-logging#commons-logging;1.1.1!commons-logging.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-codec#commons-codec;1.4!commons-codec.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-compiler;2.9.1!scala-compiler.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.9.1!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 37273ms :: artifacts dl 36153ms[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 compile produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-compile.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 runtime produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-runtime.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 test produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-test.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 provided produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-provided.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 optional produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-optional.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 compile-internal produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-compile-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 runtime-internal produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-runtime-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 test-internal produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-test-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 plugin produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-plugin.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 sources produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-sources.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 docs produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-docs.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 pom produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-pom.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 scala-tool produced in D:\ws\sample1\target\resolution-cache\reports\default-sample1_2.9.1-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (37273ms resolve - 36153ms download)[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 6105ms :: artifacts dl 333ms[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 compile produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-compile.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 runtime produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-runtime.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 test produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-test.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 provided produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-provided.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 optional produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-optional.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 compile-internal produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-compile-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 runtime-internal produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-runtime-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 test-internal produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-test-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 plugin produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-plugin.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 sources produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-sources.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 docs produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-docs.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 pom produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-pom.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sample1_2.9.1;0.1 scala-tool produced in C:\Users\Parthi\Documents\GitHub\scalalab\sample1\target\resolution-cache\reports\default-sample1_2.9.1-scala-tool.xml[0m
+[0m[[0mdebug[0m] [0m	resolve done (6105ms resolve - 333ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

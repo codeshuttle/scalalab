@@ -1,24 +1,25 @@
-[0m[[0minfo[0m] [0mRunning Main [0m
-[0m[[0mdebug[0m] [0mStarting sandboxed run...[0m
-[0m[[0mdebug[0m] [0mWaiting for threads to exit or System.exit to be called.[0m
-[0m[[0mdebug[0m] [0m  Classpath:[0m
-[0m[[0mdebug[0m] [0m	D:\ws\sample1\target\scala-2.9.1\classes[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\com.typesafe.akka\akka-actor\jars\akka-actor-2.0.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.9.1-1.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\com.typesafe.akka\akka-remote\jars\akka-remote-2.0.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\io.netty\netty\bundles\netty-3.3.0.Final.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\com.google.protobuf\protobuf-java\jars\protobuf-java-2.4.1.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\net.debasishg\sjson_2.9.1\jars\sjson_2.9.1-0.15.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\net.databinder\dispatch-json_2.9.1\jars\dispatch-json_2.9.1-0.8.5.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\org.apache.httpcomponents\httpclient\jars\httpclient-4.1.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\org.apache.httpcomponents\httpcore\jars\httpcore-4.1.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\commons-codec\commons-codec\jars\commons-codec-1.4.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\org.objenesis\objenesis\jars\objenesis-1.2.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\commons-io\commons-io\jars\commons-io-1.4.jar[0m
-[0m[[0mdebug[0m] [0m	C:\Users\Parthi\.ivy2\cache\voldemort.store.compress\h2-lzf\jars\h2-lzf-1.0.jar[0m
-[0m[[0mdebug[0m] [0mWaiting for thread run-main to exit[0m
-[0m[[0mdebug[0m] [0m	Thread run-main exited.[0m
-[0m[[0mdebug[0m] [0mInterrupting remaining threads (should be all daemons).[0m
-[0m[[0mdebug[0m] [0mSandboxed run complete..[0m
-[0m[[0mdebug[0m] [0mExited with code 0[0m
+java.lang.RuntimeException: No main class detected.
+	at scala.sys.package$.error(package.scala:27)
+	at sbt.Defaults$$anonfun$runTask$1$$anonfun$apply$36$$anonfun$apply$37$$anonfun$26.apply(Defaults.scala:646)
+	at sbt.Defaults$$anonfun$runTask$1$$anonfun$apply$36$$anonfun$apply$37$$anonfun$26.apply(Defaults.scala:646)
+	at scala.Option.getOrElse(Option.scala:120)
+	at sbt.Defaults$$anonfun$runTask$1$$anonfun$apply$36$$anonfun$apply$37.apply(Defaults.scala:646)
+	at sbt.Defaults$$anonfun$runTask$1$$anonfun$apply$36$$anonfun$apply$37.apply(Defaults.scala:645)
+	at scala.Function1$$anonfun$compose$1.apply(Function1.scala:47)
+	at sbt.$tilde$greater$$anonfun$$u2219$1.apply(TypeFunctions.scala:42)
+	at sbt.std.Transform$$anon$4.work(System.scala:64)
+	at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:237)
+	at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:237)
+	at sbt.ErrorHandling$.wideConvert(ErrorHandling.scala:18)
+	at sbt.Execute.work(Execute.scala:244)
+	at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:237)
+	at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:237)
+	at sbt.ConcurrentRestrictions$$anon$4$$anonfun$1.apply(ConcurrentRestrictions.scala:160)
+	at sbt.CompletionService$$anon$2.call(CompletionService.scala:30)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:744)
+[0m[[31merror[0m] [0m(compile:[31mrun[0m) No main class detected.[0m
