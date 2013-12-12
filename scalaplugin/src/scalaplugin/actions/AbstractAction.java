@@ -3,6 +3,7 @@
  */
 package scalaplugin.actions;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Stack;
@@ -37,7 +38,8 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 	public static final Collection<AbstractAction> actions = new ArrayList<>(2);
 	
 	abstract String[] getAction();
-
+	abstract int getPortNum();
+	
 	private Shell shell = null;
 	private StyledText message = null;
 
@@ -60,17 +62,20 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 	};
 	
 	private CommandRunner getCommandRunner(){
+		return new CommandRunner(getAction(),getBaseDir(), errorOut,
+					messageOut, getPortNum());
+
+	}
+	
+	String getBaseDir(){
 		IProject[] projects = getProject();
 		if(projects!=null && projects.length>0){
 			IProject project = projects[0];
 			IPath location = project.getLocation();
-			return new CommandRunner(getAction(),location.toFile().getAbsolutePath(), errorOut,
-					messageOut);
+			return location.toFile().getAbsolutePath();
 		}else{
-			return new CommandRunner(getAction(),".", errorOut,
-					messageOut);
+			return ".";
 		}
-
 	}
 	
 	private CommandRunner c = null;
@@ -80,7 +85,7 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 		@Override
 		public void keyReleased(KeyEvent e) {
 //			Console.log("key code '" + e.keyCode + "'");
-			showMessage(""+e.character, SWT.COLOR_WHITE);
+//			showMessage(""+e.character, SWT.COLOR_WHITE);
 			if (e.keyCode == 8 && !charEntered.isEmpty()) {
 				charEntered.pop();
 			}else if (e.keyCode == 13) {
@@ -130,6 +135,8 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 						message.setSize(500, 500);
 						Color black = new Color(display, 10, 10, 10);
 						message.setBackground(black);
+						Color white = new Color(display, 255, 255, 255);
+						message.setForeground(white);
 						c.start();
 						message.addKeyListener(listener);
 					} catch (Throwable e) {
@@ -147,7 +154,7 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 	}
 
 	private void runCommand() {
-		 String command = commands.peek() + "\n";
+		 String command = commands.peek();
 		 c.run(command);
 	}
 
@@ -220,6 +227,10 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 		return getOsName().startsWith("Windows");
 	}
 
+	static String getEclipseHome(){
+		return new File(".").getAbsolutePath();
+	}
+	
 	static String getJavaHome(){
 		return getEnvOrSys("JAVA_HOME");
 	}
