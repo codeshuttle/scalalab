@@ -24,7 +24,7 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 
 	private static final CommandExecutorMXBean exe = new CommandExecutorImpl();
 	
-	private static final ExecutorService queue = Executors.newFixedThreadPool(1);
+	private static final ExecutorService exequeue = Executors.newFixedThreadPool(1);
 
 	private static volatile String execommand = null;
 	
@@ -67,7 +67,7 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 	 */
 	@Override
 	public void execute(final String command){
-		queue.submit(new Runnable() {
+		exequeue.submit(new Runnable() {
 			@Override
 			public void run() {
 				execommand = command;
