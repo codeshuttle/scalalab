@@ -88,10 +88,9 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 		ManagementFactory.getPlatformMBeanServer().registerMBean(exe, new ObjectName(NAME_COMMAND_EXECUTOR));
 		type = args[0];
 		if("scala".equalsIgnoreCase(type)){
-//			scalaConsole();
 			invokeMain(SCALA_RUNNER,new String[]{});
-			new CountDownLatch(1).await();
 		}else{
+//			scalaConsole();
 			invokeMain(XSBT_BOOT,new String[]{});
 		}
 	}
