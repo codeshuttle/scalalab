@@ -84,16 +84,24 @@ public abstract class AbstractAction implements IWorkbenchWindowActionDelegate {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-//			Console.log("key code '" + e.keyCode + "'");
+//			Console.log("key code '" + e.keyCode + "' character '"+e.character+"' ");
 //			showMessage(""+e.character, SWT.COLOR_WHITE);
-			if (e.keyCode == 8 && !charEntered.isEmpty()) {
-				charEntered.pop();
+			if(e.keyCode==131072&&e.character!=' '){
+				// continue...
+			}else if(e.keyCode==16777224){
+				// continue...
+			}else if (e.keyCode == 8) {
+				
+				if(!charEntered.isEmpty())
+					charEntered.pop();
+				
 			}else if (e.keyCode == 13) {
 				Character[] arr = (Character[]) charEntered
 						.toArray(new Character[] {});
 				String command = new String(convert(arr));
 				commands.push(command);
 				charEntered.clear();
+				Console.log("runcommand "+command);
 				runCommand();
 			} else {
 				charEntered.push(e.character);

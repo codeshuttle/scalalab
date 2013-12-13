@@ -18,7 +18,7 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 
 	private static final String XSBT_BOOT = "xsbt.boot.Boot";
 
-	private static final String SCALA_RUNNER = "scalaplugin.repl.Repl";
+	private static final String SCALA_RUNNER = "scalaplugin.repl.IScala";
 
 	public static final String NAME_COMMAND_EXECUTOR = "org.scalaplugin:type=CommandExecutor";
 
@@ -27,6 +27,8 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 	private static final ExecutorService exequeue = Executors.newFixedThreadPool(1);
 
 	private static volatile String execommand = null;
+
+	private static CountDownLatch waitLatch = null;
 	
 	public static final BufferedReader reader = new BufferedReader(new Reader() {
 		
@@ -53,13 +55,11 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 			}
 			String c = execommand;
 			execommand = null;
-			System.out.println("Command "+c);
+//			System.out.println("Command "+c);
 			return c;
 		}
 		
 	};
-	
-	private static CountDownLatch waitLatch = null;
 	
 	
 	/* (non-Javadoc)
@@ -70,10 +70,24 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 		exequeue.submit(new Runnable() {
 			@Override
 			public void run() {
-				execommand = command;
-				if(waitLatch!=null){
-					waitLatch.countDown();
-					waitLatch = null;
+				if("scala".equalsIgnoreCase(type)){
+					execommand = command;
+					if(waitLatch!=null){
+						waitLatch.countDown();
+						waitLatch = null;
+					}
+				}else{
+					try {
+						invokeMain(XSBT_BOOT,new String[]{command});
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					} catch (NoSuchMethodException e) {
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});

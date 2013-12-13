@@ -81,7 +81,7 @@ class MainGenericRunner {
   }
 }
 
-object Repl extends MainGenericRunner {
+object IScala extends MainGenericRunner {
   def main(args: Array[String]) {
     if (!process(args))
       sys.exit(1)
