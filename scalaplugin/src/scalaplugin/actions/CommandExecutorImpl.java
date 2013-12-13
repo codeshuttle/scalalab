@@ -30,6 +30,21 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 
 	private static CountDownLatch waitLatch = null;
 	
+//	private static volatile int cursor = 0; 	
+//	private static final InputStream in =  new InputStream() {
+//		
+//		@Override
+//		public int read() throws IOException {
+//			waitAndWatch();
+//			if(execommand!=null && cursor>=execommand.length()){
+//				cursor = 0;
+//				execommand=null;
+//				return 13;
+//			}
+//			return execommand.charAt(cursor++);
+//		}
+//	};
+	
 	public static final BufferedReader reader = new BufferedReader(new Reader() {
 		
 		@Override
@@ -44,15 +59,7 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 
 		@Override
 		public String readLine() throws IOException {
-			if(execommand==null){
-				waitLatch = new CountDownLatch(1);
-				try {
-					waitLatch.await();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-					return ":q";
-				}
-			}
+			waitAndWatch();
 			String c = execommand;
 			execommand = null;
 //			System.out.println("Command "+c);
@@ -70,34 +77,38 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 		exequeue.submit(new Runnable() {
 			@Override
 			public void run() {
-				if("scala".equalsIgnoreCase(type)){
+//				if("scala".equalsIgnoreCase(type)){
 					execommand = command;
-					if(waitLatch!=null){
-						waitLatch.countDown();
-						waitLatch = null;
-					}
-				}else{
-					try {
-						invokeMain(XSBT_BOOT,new String[]{command});
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					} catch (NoSuchMethodException e) {
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						e.printStackTrace();
-					} catch (InvocationTargetException e) {
-						e.printStackTrace();
-					}
-				}
+					signalWatch();
+//				}else{
+//					try {
+//						invokeMain(XSBT_BOOT,new String[]{command});
+//					} catch (ClassNotFoundException e) {
+//						e.printStackTrace();
+//					} catch (NoSuchMethodException e) {
+//						e.printStackTrace();
+//					} catch (IllegalAccessException e) {
+//						e.printStackTrace();
+//					} catch (InvocationTargetException e) {
+//						e.printStackTrace();
+//					}
+//				}
 			}
 		});
 	} 
 	
+	static void signalWatch() {
+		if(waitLatch!=null){
+			waitLatch.countDown();
+			waitLatch = null;
+		}
+	}
+
 	public CommandExecutorImpl() {
 	}
 
 	public static void main(String[] args) throws Throwable{
-//		System.setIn(in);
+//		
 //		System.out.println("Started CommandExecutorImpl! Console readLine "+new BufferedReader (new InputStreamReader(System.in)).readLine());
 		ManagementFactory.getPlatformMBeanServer().registerMBean(exe, new ObjectName(NAME_COMMAND_EXECUTOR));
 		type = args[0];
@@ -105,6 +116,7 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 			invokeMain(SCALA_RUNNER,new String[]{});
 		}else{
 //			scalaConsole();
+//			System.setIn(in);
 			invokeMain(XSBT_BOOT,new String[]{});
 		}
 	}
@@ -125,6 +137,25 @@ public class CommandExecutorImpl implements CommandExecutorMXBean{
 		}
 	}
 
+	static void waitAndWatch() {
+		if(execommand==null){
+			waitLatch = new CountDownLatch(1);
+			try {
+				waitLatch.await();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+//				return ":q";
+			}
+		}
+	}
+
+	
+	
+//	org.fusesource.jansi.internal.Kernel32
+//	STD_INPUT_HANDLE
+//	org.fusesource.jansi.internal.WindowsSupport.setConsoleMode(int mode) 
+	
+	
 //	@Override
 //	public void write(final String command) {
 //		queue.submit(new Runnable() {
