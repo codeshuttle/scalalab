@@ -36,7 +36,7 @@ public class CommandRunner {
 	private ScheduledExecutorService thread = null;
 	
 	private Process sbtProcess = null;
-//	private CommandExecutorMXBean commandExecutor = null;
+	private CommandExecutorMXBean commandExecutor = null;
 	
 	public CommandRunner(String[] command,String baseDir, Writer errorWriter, Writer inputWriter, int port) {
 		super();
@@ -48,17 +48,17 @@ public class CommandRunner {
 	}
 	
 	public void run(final String command){
-		try {
-			sbtProcess.getOutputStream().write(("\n"+command+"\n").getBytes());
-			sbtProcess.getOutputStream().flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-//		if(commandExecutor!=null ){
-//			commandExecutor.execute(command);
-//		}else{
-//			Console.error("Unable to execute command '" + command + "'");
+//		try {
+//			sbtProcess.getOutputStream().write(("\n"+command+"\n").getBytes());
+//			sbtProcess.getOutputStream().flush();
+//		} catch (IOException e) {
+//			e.printStackTrace();
 //		}
+		if(commandExecutor!=null ){
+			commandExecutor.execute(command);
+		}else{
+			Console.error("Unable to execute command '" + command + "'");
+		}
 	}
 	
 	private volatile boolean running = false;
@@ -96,16 +96,16 @@ public class CommandRunner {
 							}
 						}, 1, 1, TimeUnit.SECONDS);
 				
-//				Thread.sleep(10000);
+				Thread.sleep(10000);
 				
-//				JMXServiceURL u = new JMXServiceURL(
-//						  "service:jmx:rmi:///jndi/rmi://localhost:" + port +  "/jmxrmi");
-//				JMXConnector jmxc = JMXConnectorFactory.connect(u);
-//				MBeanServerConnection mbsc = 
-//					    jmxc.getMBeanServerConnection();
-//				ObjectName mbeanName = new ObjectName(CommandExecutorImpl.NAME_COMMAND_EXECUTOR);
-//				commandExecutor = JMX.newMBeanProxy(mbsc, mbeanName, 
-//						CommandExecutorMXBean.class, true);
+				JMXServiceURL u = new JMXServiceURL(
+						  "service:jmx:rmi:///jndi/rmi://localhost:" + port +  "/jmxrmi");
+				JMXConnector jmxc = JMXConnectorFactory.connect(u);
+				MBeanServerConnection mbsc = 
+					    jmxc.getMBeanServerConnection();
+				ObjectName mbeanName = new ObjectName(CommandExecutorImpl.NAME_COMMAND_EXECUTOR);
+				commandExecutor = JMX.newMBeanProxy(mbsc, mbeanName, 
+						CommandExecutorMXBean.class, true);
 				
 //				Console.log("connected to the remote process!");
 				
@@ -231,17 +231,17 @@ public class CommandRunner {
 			"-Dsbt.log.format=true",
 //			"-Djline.terminal=jline.UnsupportedTerminal",
 			
-//			"-Dcom.sun.management.jmxremote",
-//			"-Dcom.sun.management.jmxremote.port="+portNum,
-//			"-Dcom.sun.management.jmxremote.local.only=false",
-//			"-Dcom.sun.management.jmxremote.authenticate=false",
-//			"-Dcom.sun.management.jmxremote.ssl=false",
+			"-Dcom.sun.management.jmxremote",
+			"-Dcom.sun.management.jmxremote.port="+portNum,
+			"-Dcom.sun.management.jmxremote.local.only=false",
+			"-Dcom.sun.management.jmxremote.authenticate=false",
+			"-Dcom.sun.management.jmxremote.ssl=false",
 			
 			"-cp",
 			""+AbstractAction.getSbtHome() + File.separator + "bin" + File.separator + "sbt-launch.jar"+File.pathSeparatorChar+System.getProperty("java.class.path")+File.pathSeparatorChar+"D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.ui_3.105.0.v20130522-1122.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.swt_3.102.1.v20130827-2021.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.swt.win32.win32.x86_64_3.102.1.v20130827-2048.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.jface_3.9.1.v20130725-1141.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.core.commands_3.6.100.v20130515-1857.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.ui.workbench_3.105.1.v20130821-1411.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.e4.ui.workbench3_0.12.0.v20130515-1857.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.core.runtime_3.9.0.v20130326-1255.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.osgi_3.9.1.v20130814-1242.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.equinox.common_3.6.200.v20130402-1505.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.core.jobs_3.5.300.v20130429-1813.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.core.runtime.compatibility.registry_3.5.200.v20130514-1256\\runtime_registry_compatibility.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.equinox.registry_3.5.301.v20130717-1549.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.equinox.preferences_3.5.100.v20130422-1538.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.core.contenttype_3.4.200.v20130326-1255.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.equinox.app_1.3.100.v20130327-1442.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.jface.text_3.8.101.v20130802-1147.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.text_3.5.300.v20130515-1451.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.core.resources_3.8.101.v20130717-0806.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.ui.editors_3.8.100.v20130513-1637.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.core.filebuffers_3.5.300.v20130225-1821.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.ui.ide_3.9.1.v20130704-1828.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.ui.views_3.6.100.v20130326-1250.jar;D:\\soft\\eclipse-standard-kepler-SR1-win32-x86_64\\eclipse\\plugins\\org.eclipse.ui.workbench.texteditor_3.8.101.v20130729-1318.jar;C:\\Users\\Parthi\\Documents\\GitHub\\scalalab\\scalaplugin\\bin",
-			"xsbt.boot.Boot"
-//			"scalaplugin.actions.CommandExecutorImpl",
-//			"sbt"
+//			"xsbt.boot.Boot"
+			"scalaplugin.actions.CommandExecutorImpl",
+			"sbt"
 		};
 		
 		new CommandRunner(cmd,baseBir, errorOut, messageOut, portNum).start();
