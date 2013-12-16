@@ -53,10 +53,10 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 	var editor:TextEditor = null;
 
 	/** The font chosen in page 1. */
-	var font:Font;
+	var font:Font = null;
 
 	/** The text widget used in page 2. */
-	var text:StyledText ;
+	var text:StyledText = null ;
 	
 	/**
 	 * Creates page 0 of the multi-page editor,
@@ -136,7 +136,7 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 	 * <code>IWorkbenchPart</code> method disposes all nested editors.
 	 * Subclasses may extend.
 	 */
-	def dispose() :Unit ={
+	override def dispose() :Unit ={
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this)
 		super.dispose()
 		Console.log(this.toString()+" dispose")
@@ -176,7 +176,7 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 	 * The <code>MultiPageEditorExample</code> implementation of this method
 	 * checks that the input is an instance of <code>IFileEditorInput</code>.
 	 */
-	def init( site:IEditorSite, editorInput:IEditorInput ):Unit = {
+	override def init( site:IEditorSite, editorInput:IEditorInput ):Unit = {
 //		throws PartInitException {
 		Console.log(this.toString()+" init");
 		if (!(editorInput.isInstanceOf[ IFileEditorInput]))
@@ -194,7 +194,7 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 	/**
 	 * Calculates the contents of page 2 when the it is activated.
 	 */
-	protected def pageChange(newPageIndex:Int):Unit = {
+	override protected def pageChange(newPageIndex:Int):Unit = {
 		Console.log(this.toString()+" pageChange "+newPageIndex)
 		super.pageChange(newPageIndex)
 		if (newPageIndex == 2) {
@@ -374,13 +374,13 @@ class ScalaPageEditorContributor extends MultiPageEditorActionBarContributor {
 				getImageDescriptor(IDE.SharedImages.IMG_OBJS_TASK_TSK))
 	}
 	
-	def contributeToMenu( manager:IMenuManager):Unit =  {
+	override def contributeToMenu( manager:IMenuManager):Unit =  {
 		val menu:IMenuManager = new MenuManager("Editor &Menu")
 		manager.prependToGroup(IWorkbenchActionConstants.MB_ADDITIONS, menu)
 		menu.add(sampleAction)
 	}
 	
-	def contributeToToolBar( manager:IToolBarManager):Unit =  {
+	override def contributeToToolBar( manager:IToolBarManager):Unit =  {
 		manager.add(new Separator())
 		manager.add(sampleAction)
 	}

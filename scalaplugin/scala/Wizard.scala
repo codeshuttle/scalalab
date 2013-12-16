@@ -29,15 +29,15 @@ import org.eclipse.ui.ide.IDE
  */
 
 class ScalaNewWizard extends Wizard with INewWizard {
-	var page:ScalaNewWizardPage ;
-	var selection:ISelection ;
+	var page:ScalaNewWizardPage = null ;
+	var selection:ISelection = null;
 
 	setNeedsProgressMonitor(true)
 	
 	/**
 	 * Adding the page to the wizard.
 	 */
-	def addPages():Unit = {
+	override def addPages():Unit = {
 		page = new ScalaNewWizardPage(selection);
 		addPage(page);
 	}

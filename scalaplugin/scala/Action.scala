@@ -124,7 +124,7 @@ trait AbstractAction {
 	   (for(i<-charEntered.reverse.toList) yield(i))(collection.breakOut)
 	}
 
-	override def run( action:IAction):Unit = {
+	def run( action:IAction):Unit = {
 		if (c==null) {
 			c = getCommandRunner()
 			Display.getDefault().asyncExec(new Runnable() {
@@ -174,7 +174,7 @@ trait AbstractAction {
 //		return carr
 //	}
 
-	override def selectionChanged( action:IAction, selection:ISelection):Unit=  {
+	def selectionChanged( action:IAction, selection:ISelection):Unit=  {
 
 	}
 
@@ -194,7 +194,7 @@ trait AbstractAction {
 		})
 	}
 
-	override def dispose():Unit= {
+	def dispose():Unit= {
 		Display.getDefault().asyncExec(new Runnable() {
 			override def run() :Unit= {
 				try {
@@ -215,7 +215,7 @@ trait AbstractAction {
 		})
 	}
 
-	override def init( window:IWorkbenchWindow):Unit=  {
+	def init( window:IWorkbenchWindow):Unit=  {
 		// shell = window.getShell()
 	}
 
@@ -284,7 +284,7 @@ object AbstractAction{
 
 class SbtAction extends AbstractAction with IWorkbenchWindowActionDelegate {
 	
-	val title:String = "Simple Build Tool";
+	var title:String = "Simple Build Tool";
 
 	override def getAction():Array[String]={
 		 Array(
@@ -336,7 +336,7 @@ class SbtAction extends AbstractAction with IWorkbenchWindowActionDelegate {
 
 class ScalaAction extends AbstractAction with IWorkbenchWindowActionDelegate{
 
-	val title:String = "Scala Interpreter";
+	var title:String = "Scala Interpreter";
 	
 	override def getAction():Array[String]={
 		 Array(
@@ -391,7 +391,7 @@ import scalaplugin.Console
 class CommandRunner(cmd:Array[String],baseDir:File,errorWriter:Writer,
 			inputWriter:Writer,port:Int) {
 	
-	var scheduleAtFixedRate:ScheduledFuture[?] = null
+	var scheduleAtFixedRate:ScheduledFuture[_] = null
 	var service:ExecutorService = null
 	var thread:ScheduledExecutorService = null
 	
@@ -497,12 +497,15 @@ class CommandRunner(cmd:Array[String],baseDir:File,errorWriter:Writer,
 		val content:StringBuffer = new StringBuffer()
 		val available:Int = in.available()
 		if(available > 0){
-			while( true ){
-				var read:Int = in.read()
-				if(read==-1||skip==startSkip+available-1)  break
-
-				skip++
-				content.append((char)read)
+			var read:Int = in.read()
+			var check:Boolean = ( read == -1 || skip == (startSkip+available-1) );
+			while( !check ){
+				skip = skip+1
+				content.append(read.asInstanceOf[Char])
+				
+				read = in.read()
+				
+				check = ( read == -1 || skip == (startSkip+available-1) );
 			}
 		}
 		if(content.length()>0){
@@ -513,7 +516,7 @@ class CommandRunner(cmd:Array[String],baseDir:File,errorWriter:Writer,
 	
 	def stop():Unit={
 		if(sbtProcess!=null){
-			if(this.cmd(0).indexOf("scala")!=-1){
+			if( this.cmd(0).contains("scala") ){// indexOf() != -1 
 				run(":q\n")
 			}else{
 				run("exit\n")
@@ -623,7 +626,7 @@ class CommandExecutorImpl{
 	/* (non-Javadoc)
 	 * @see scalaplugin.actions.CommandExecutor#execute(java.lang.String)
 	 */
-	override def execute(command:String){
+	 def execute(command:String){
 		CommandExecutorImpl.exequeue.submit(new Runnable() {
 			override def run():Unit= {
 //				if("scala".equalsIgnoreCase(type)){
@@ -720,7 +723,7 @@ object CommandExecutorImpl{
 	}
 	
 	var runtype:String = null
-	var loadClass:Class[?] = null
+	var loadClass:Class[_] = null
 	
 	private def invokeMain( clazzname:String, params:Array[String]):Unit = {
 	/* throws ClassNotFoundException,
