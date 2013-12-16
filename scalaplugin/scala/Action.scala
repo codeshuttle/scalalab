@@ -8,6 +8,9 @@ trait Writer {
 	def write( content:String):Unit
 }
 
+import scala.collection.JavaConversions._
+import scala.collection.mutable.Stack
+
 import java.io.File
 import java.util.ArrayList
 import java.util.Collection
@@ -42,15 +45,15 @@ trait AbstractAction {
 	var title:String
 //	public static final Collection<AbstractAction> actions = new ArrayList<>(2)
 	
-	abstract def getAction():Array[String]
+	def getAction():Array[String]
 	
-	abstract def getPortNum():Int
+	def getPortNum():Int
 	
 	var shell:Shell  = null;
 	var message:StyledText = null;
 
-	val charEntered:Stack[Char] = new Stack[Char];
-	val commands:Stack[String] = new Stack[String];
+	val charEntered:Stack[Char] = new Stack[Char]
+	val commands:Stack[String] = new Stack[String]
 
 	val errorOut:Writer = new Writer() {
 
@@ -67,15 +70,15 @@ trait AbstractAction {
 	}
 	
 	private def getCommandRunner():CommandRunner = {
-		new CommandRunner(getAction(),getBaseDir(), errorOut,
+		new CommandRunner(getAction(),new File(getBaseDir()), errorOut,
 					messageOut, getPortNum())
 	}
 	
 	def getBaseDir():String={
-		Array[IProject] projects = getProject()
+		val projects:Array[IProject] = getProject()
 		if(projects!=null && projects.length>0){
-			IProject project = projects(0)
-			IPath location = project.getLocation()
+			val project:IProject = projects(0)
+			val location:IPath = project.getLocation()
 			location.toFile().getAbsolutePath()
 		}else{
 			"."
@@ -95,14 +98,15 @@ trait AbstractAction {
 				// continue...
 			}else if (e.keyCode == 8) {
 				
-				if(!charEntered.isEmpty())
+				if(charEntered.size>0)
 					charEntered.pop()
 				
 			}else if (e.keyCode == 13) {
 //				Character[] arr = (Character[]) charEntered
 //						.toArray(new Character[] {})
 //				String command = new String(convert(arr))
-				commands.push(getCommand())
+			  val command:String = getCommand()
+				commands.push(command)
 				charEntered.clear()
 				Console.log("runcommand "+command)
 				runCommand()
@@ -126,7 +130,7 @@ trait AbstractAction {
 			Display.getDefault().asyncExec(new Runnable() {
 				override def run():Unit= {
 					try {
-						Display display = Display.getCurrent()
+						val display:Display = Display.getCurrent()
 						shell = new Shell(display, SWT.CLOSE
 								| SWT.TITLE | SWT.MIN | SWT.MAX | SWT.RESIZE
 								| SWT.SHELL_TRIM)// SWT.None
@@ -136,20 +140,21 @@ trait AbstractAction {
 						shell.setText(title)
 						message = new StyledText(shell, SWT.BORDER|SWT.MULTI)
 						message.setSize(500, 500)
-						Color black = new Color(display, 10, 10, 10)
+						val black:Color = new Color(display, 10, 10, 10)
 						message.setBackground(black)
-						Color white = new Color(display, 255, 255, 255)
+						val white:Color = new Color(display, 255, 255, 255)
 						message.setForeground(white)
 						c.start()
 						message.addKeyListener(listener)
-					} catch (Throwable e) {
+					} catch{
+					  case e: Throwable  =>
 						Console.error(e)
 					}
 				}
 			})
 		} else {
 			Display.getDefault().asyncExec(new Runnable() {
-				public void run() {
+				override def run():Unit= {
 					shell.setActive()
 				}
 			})
@@ -157,7 +162,7 @@ trait AbstractAction {
 	}
 
 	private def runCommand():Unit= {
-		 String command = commands.peek()
+		 val command:String = commands.pop()
 		 c.run(command)
 	}
 //
@@ -202,7 +207,8 @@ trait AbstractAction {
 					charEntered.clear()
 					commands.clear()
 					c = null
-				} catch (Throwable e) {
+				} catch {
+				  case e:Throwable =>
 					Console.error(e)
 				}
 			}
@@ -214,15 +220,15 @@ trait AbstractAction {
 	}
 
 	def getProject():Array[IProject]= {
-		IWorkspace workspace = ResourcesPlugin.getWorkspace()
-        IWorkspaceRoot root = workspace.getRoot()
+		val workspace:IWorkspace = ResourcesPlugin.getWorkspace()
+        val root:IWorkspaceRoot = workspace.getRoot()
         return root.getProjects()
 
 	}
 	
 	private def setMessage(textToAppend:String,textColor:Int,fontStyle:Int):Unit= {
 		try {
-			StyleRange styleRange = new StyleRange()
+			val styleRange:StyleRange = new StyleRange()
 			styleRange.start = message.getCharCount()
 			styleRange.length = textToAppend.length()
 			styleRange.fontStyle = fontStyle
@@ -230,7 +236,8 @@ trait AbstractAction {
 			message.append(textToAppend)
 			message.setStyleRange(styleRange)
 //			Console.log(textToAppend)
-		} catch (Throwable e) {
+		} catch {
+		  case e:Throwable =>
 			Console.error(e)
 		}
 	}
@@ -277,10 +284,7 @@ object AbstractAction{
 
 class SbtAction extends AbstractAction with IWorkbenchWindowActionDelegate {
 	
-	this(){
-		title = "Simple Build Tool";
-	}
-	
+	val title:String = "Simple Build Tool";
 
 	override def getAction():Array[String]={
 		 Array(
@@ -332,12 +336,7 @@ class SbtAction extends AbstractAction with IWorkbenchWindowActionDelegate {
 
 class ScalaAction extends AbstractAction with IWorkbenchWindowActionDelegate{
 
-	/**
-	 * 
-	 */
-	this() {
-		title = "Scala Interpreter";
-	}
+	val title:String = "Scala Interpreter";
 	
 	override def getAction():Array[String]={
 		 Array(
@@ -392,7 +391,7 @@ import scalaplugin.Console
 class CommandRunner(cmd:Array[String],baseDir:File,errorWriter:Writer,
 			inputWriter:Writer,port:Int) {
 	
-	var scheduleAtFixedRate:ScheduledFuture = null
+	var scheduleAtFixedRate:ScheduledFuture[?] = null
 	var service:ExecutorService = null
 	var thread:ScheduledExecutorService = null
 	
@@ -403,7 +402,8 @@ class CommandRunner(cmd:Array[String],baseDir:File,errorWriter:Writer,
 		try {
 			sbtProcess.getOutputStream().write(("\n"+command+"\n").getBytes())
 			sbtProcess.getOutputStream().flush()
-		} catch (IOException e) {
+		} catch{
+		  case e:IOException =>
 			e.printStackTrace()
 		}
 //		if(commandExecutor!=null ){
@@ -419,7 +419,7 @@ class CommandRunner(cmd:Array[String],baseDir:File,errorWriter:Writer,
 		
 		override def run():Unit= {
 			try {
-				val pb:ProcessBuilder = new ProcessBuilder(cmd)
+				val pb:ProcessBuilder = new ProcessBuilder(cmd.toList)
 				pb.directory(baseDir)
 				sbtProcess = pb.start()
 				
@@ -438,7 +438,8 @@ class CommandRunner(cmd:Array[String],baseDir:File,errorWriter:Writer,
 									pipe(sbtProcess.getErrorStream(),errorWriter)
 //									Console.log("Write response from Thread message!")
 									pipe(sbtProcess.getInputStream(),inputWriter)
-								} catch (IOException e) {
+								} catch {
+								  case e:IOException =>
 									handleException(e)
 								}finally{
 									running = false
@@ -461,7 +462,8 @@ class CommandRunner(cmd:Array[String],baseDir:File,errorWriter:Writer,
 				
 				sbtProcess.waitFor()
 				
-			} catch (Exception e) {
+			} catch {
+			  case  e: Exception =>
 				handleException(e)
 			}finally{
 			}
@@ -478,13 +480,13 @@ class CommandRunner(cmd:Array[String],baseDir:File,errorWriter:Writer,
 	}
 
 	def handleException( e:Exception):Unit= {
-		StringWriter sw = new StringWriter()
+		val sw:StringWriter = new StringWriter()
 		e.printStackTrace(new PrintWriter(sw))
 		Console.error(sw.toString())
 		errorWriter.write(sw.toString())
 	}
 	
-	val readMap:Map = new HashMap(2)
+	val readMap:Map[InputStream,Long] = new HashMap(2)
 	
 	private def pipe( in:InputStream, out:Writer) :Unit= {
 		var skip:Long = readMap.remove(in).longValue()
@@ -622,7 +624,7 @@ class CommandExecutorImpl{
 	 * @see scalaplugin.actions.CommandExecutor#execute(java.lang.String)
 	 */
 	override def execute(command:String){
-		exequeue.submit(new Runnable() {
+		CommandExecutorImpl.exequeue.submit(new Runnable() {
 			override def run():Unit= {
 //				if("scala".equalsIgnoreCase(type)){
 					CommandExecutorImpl.execommand = command
@@ -659,7 +661,7 @@ object CommandExecutorImpl{
 
 	var waitLatch:CountDownLatch = null
 	
-	val emptyArr:Array[String] = List();
+	val emptyArr:Array[String] = Array[String]();
 	
 //	private static volatile int cursor = 0; 	
 //	val InputStream in =  new InputStream() {
@@ -688,7 +690,7 @@ object CommandExecutorImpl{
 
 		override def readLine():String = {
 			waitAndWatch()
-			String c = execommand
+			val c:String = execommand
 			execommand = null
 //			System.out.println("Command "+c);
 			c
@@ -718,7 +720,7 @@ object CommandExecutorImpl{
 	}
 	
 	var runtype:String = null
-	var loadClass:Class = null
+	var loadClass:Class[?] = null
 	
 	private def invokeMain( clazzname:String, params:Array[String]):Unit = {
 	/* throws ClassNotFoundException,
@@ -728,8 +730,8 @@ object CommandExecutorImpl{
 			loadClass = ClassLoader.getSystemClassLoader.loadClass(clazzname)
 		}
 		if(loadClass!=null){
-			Method main = loadClass.getMethod("main")
-			main.invoke(null, (Object)params)
+			val main:Method = loadClass.getMethod("main")
+			main.invoke(null, params)
 		}else{
 			System.err.println("Unable to invoke sbt Boot class.")
 		}
@@ -740,7 +742,8 @@ object CommandExecutorImpl{
 			waitLatch = new CountDownLatch(1)
 			try {
 				waitLatch.await()
-			} catch (InterruptedException e) {
+			} catch {
+			  case e:InterruptedException =>
 				e.printStackTrace()
 //				return ":q";
 			}

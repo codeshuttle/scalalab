@@ -213,7 +213,7 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 		){
 			Display.getDefault().asyncExec(new Runnable(){
 				override def run():Unit= {
-					Array[IWorkbenchPage] pages = getSite().getWorkbenchWindow().getPages()
+					val pages:Array[IWorkbenchPage] = getSite().getWorkbenchWindow().getPages()
 					for(wbPage <- pages){
 						val editorPart:IEditorPart = wbPage.findEditor(editor.getEditorInput())
 						wbPage.closeEditor(editorPart,true)
