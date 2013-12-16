@@ -45,6 +45,10 @@ import scalaplugin.Console
  */
 class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 
+	ResourcesPlugin.getWorkspace().addResourceChangeListener(this)
+	Console.log(this.toString())
+
+
 	/** The text editor used in page 0. */
 	var editor:TextEditor = null;
 
@@ -55,15 +59,6 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 	var text:StyledText ;
 	
 	/**
-	 * Creates a multi-page editor example.
-	 */
-	def this() {
-		//super()
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(this)
-		Console.log(this.toString())
-	}
-	
-	/**
 	 * Creates page 0 of the multi-page editor,
 	 * which contains a text editor.
 	 */
@@ -72,7 +67,8 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 			editor = new TextEditor()
 			val index:Int = addPage(editor, getEditorInput())
 			setPageText(index, editor.getTitle())
-		} catch (PartInitException e) {
+		} catch {
+			case e:PartInitException => 
 			ErrorDialog.openError(
 				getSite().getShell(),
 				"Error creating nested text editor",
@@ -88,7 +84,7 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 	 */
 	def createPage1():Unit = {
 		val composite:Composite = new Composite(getContainer(), SWT.NONE)
-		val layout: = new GridLayout()
+		val layout:GridLayout = new GridLayout()
 		composite.setLayout(layout)
 		layout.numColumns = 2
 
@@ -99,7 +95,7 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 		fontButton.setText("Change Font...")
 		
 		fontButton.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent event) {
+			override def widgetSelected( event:SelectionEvent) {
 				setFont()
 			}
 		});
@@ -120,7 +116,7 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 		text = new StyledText(composite, SWT.H_SCROLL | SWT.V_SCROLL)
 		text.setEditable(false)
 
-		val index:int = addPage(composite)
+		val index:Int = addPage(composite)
 		setPageText(index, "Preview")
 		Console.log(this.toString()+" createPage2")
 	}
@@ -180,10 +176,10 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 	 * The <code>MultiPageEditorExample</code> implementation of this method
 	 * checks that the input is an instance of <code>IFileEditorInput</code>.
 	 */
-	def void init( site:IEditorSite, editorInput:IEditorInput ):Unit = {
+	def init( site:IEditorSite, editorInput:IEditorInput ):Unit = {
 //		throws PartInitException {
 		Console.log(this.toString()+" init");
-		if (!(editorInput instanceof IFileEditorInput))
+		if (!(editorInput.isInstanceOf[ IFileEditorInput]))
 			throw new PartInitException("Invalid Input: Must be IFileEditorInput")
 		super.init(site, editorInput)
 	}
@@ -211,16 +207,25 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 	 */
 	def resourceChanged(event:IResourceChangeEvent):Unit = {
 		Console.log(this.toString()+" resourceChanged "+event)
-		if(event.getType() == IResourceChangeEvent.PRE_CLOSE){
+		val edin:FileEditorInput = editor.getEditorInput().asInstanceOf[FileEditorInput]
+		if(event.getType() == IResourceChangeEvent.PRE_CLOSE &&
+			edin.getFile().getProject().equals(event.getResource())
+		){
 			Display.getDefault().asyncExec(new Runnable(){
 				override def run():Unit= {
 					Array[IWorkbenchPage] pages = getSite().getWorkbenchWindow().getPages()
+					for(wbPage <- pages){
+						val editorPart:IEditorPart = wbPage.findEditor(editor.getEditorInput())
+						wbPage.closeEditor(editorPart,true)
+					}
+					/*
 					for (int i = 0; i<pages.length; i++){
 						if(((FileEditorInput)editor.getEditorInput()).getFile().getProject().equals(event.getResource())){
 							IEditorPart editorPart = pages(i).findEditor(editor.getEditorInput())
 							pages(i).closeEditor(editorPart,true)
 						}
 					}
+					*/
 				}            
 			})
 		}
@@ -231,7 +236,7 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 	 */
 	def setFont():Unit =  {
 		Console.log(this.toString()+" setFont ")
-		FontDialog fontDialog = new FontDialog(getSite().getShell())
+		val fontDialog:FontDialog = new FontDialog(getSite().getShell())
 		fontDialog.setFontList(text.getFont().getFontData())
 		val fontData:FontData = fontDialog.open()
 		if (fontData != null) {
@@ -252,15 +257,18 @@ class ScalaPageEditor extends MultiPageEditorPart with IResourceChangeListener{
 
 		val tokenizer:StringTokenizer =
 			new StringTokenizer(editorText, " \t\n\r\f!@#\u0024%^&*()-_=+`~[]{};:'\",.<>/?|\\")
-		val editorWords:ArrayList = new ArrayList()
+		val editorWords:ArrayList[Object] = new ArrayList[Object]()
 		while (tokenizer.hasMoreTokens()) {
 			editorWords.add(tokenizer.nextToken())
 		}
 
 		Collections.sort(editorWords, Collator.getInstance())
 		val displayText:StringWriter = new StringWriter()
-		for (int i = 0; i < editorWords.size(); i++) {
-			displayText.write(((String) editorWords.get(i)))
+		//for (int i = 0; i < editorWords.size(); i++) {
+		val e = editorWords.size()-1
+		for( i <- 0 to e ){
+			val w:Object = editorWords.get(i)
+			displayText.write(w.toString)
 			displayText.write(System.getProperty("line.separator"))
 		}
 		text.setText(displayText.toString())
@@ -290,20 +298,18 @@ class ScalaPageEditorContributor extends MultiPageEditorActionBarContributor {
 	var activeEditorPart:IEditorPart = null;
 	var sampleAction:Action = null;
 	
-	/**
-	 * Creates a multi-page contributor.
-	 */
-	def this() {
-		//super()
-		createActions()
-	}
+	createActions()
 	
 	/**
 	 * Returns the action registed with the given text editor.
 	 * @return IAction or null if editor is null.
 	 */
 	protected def getAction( editor:ITextEditor, actionID:String ):IAction = {
-		return (editor == null ? null : editor.getAction(actionID))
+		if(editor == null){
+			null
+		}else{
+			editor.getAction(actionID)
+		}
 	}
 	
 	/* (non-JavaDoc)
@@ -317,8 +323,13 @@ class ScalaPageEditorContributor extends MultiPageEditorActionBarContributor {
 
 		val actionBars:IActionBars = getActionBars()
 		if (actionBars != null) {
-
-			val editor:ITextEditor = (part instanceof ITextEditor) ? (ITextEditor) part : null
+			
+			var editor:ITextEditor = null
+			
+			if( part.isInstanceOf[ ITextEditor] ){
+				editor = part.asInstanceOf[ITextEditor]
+			}
+			//val editor:ITextEditor = (part instanceof ITextEditor) ? (ITextEditor) part : null
 
 			actionBars.setGlobalActionHandler(
 				ActionFactory.DELETE.getId(),
@@ -364,7 +375,7 @@ class ScalaPageEditorContributor extends MultiPageEditorActionBarContributor {
 	}
 	
 	def contributeToMenu( manager:IMenuManager):Unit =  {
-		IMenuManager menu = new MenuManager("Editor &Menu")
+		val menu:IMenuManager = new MenuManager("Editor &Menu")
 		manager.prependToGroup(IWorkbenchActionConstants.MB_ADDITIONS, menu)
 		menu.add(sampleAction)
 	}

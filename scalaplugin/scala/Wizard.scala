@@ -32,14 +32,7 @@ class ScalaNewWizard extends Wizard with INewWizard {
 	var page:ScalaNewWizardPage ;
 	var selection:ISelection ;
 
-	/**
-	 * Constructor for ScalaNewWizard.
-	 */
-	 /*
-	def this() {
-		//setNeedsProgressMonitor(true)
-	}
-	*/
+	setNeedsProgressMonitor(true)
 	
 	/**
 	 * Adding the page to the wizard.
@@ -58,11 +51,11 @@ class ScalaNewWizard extends Wizard with INewWizard {
 		val containerName:String = page.getContainerName()
 		val fileName:String = page.getFileName()
 		var op:IRunnableWithProgress = new IRunnableWithProgress() {
-			public void run(IProgressMonitor monitor) throws InvocationTargetException {
+			override def run( monitor:IProgressMonitor):Unit= {
 				try {
 					doFinish(containerName, fileName, monitor)
-				} catch (CoreException e) {
-					throw new InvocationTargetException(e)
+				} catch {
+				  case e:CoreException =>throw new InvocationTargetException(e)
 				} finally {
 					monitor.done()
 				}
@@ -73,7 +66,7 @@ class ScalaNewWizard extends Wizard with INewWizard {
 		} catch{
 			case e:	InterruptedException => false
 			case e:	InvocationTargetException => {
-				Throwable realException = e.getTargetException()
+				val realException:Throwable = e.getTargetException()
 				MessageDialog.openError(getShell(), "Error", realException.getMessage())
 				false
 			}
@@ -94,12 +87,13 @@ class ScalaNewWizard extends Wizard with INewWizard {
 //		throws CoreException {
 		// create a sample file
 		monitor.beginTask("Creating " + fileName, 2)
-		var root:IWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot()
-		var resource:IResource = root.findMember(new Path(containerName))
-		if (!resource.exists() || !(resource instanceof IContainer)) {
+		val root:IWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot()
+		val resource:IResource = root.findMember(new Path(containerName))
+		val ins = !(resource.isInstanceOf[IContainer])
+		if ( (!resource.exists()) || ins ) {
 			throwCoreException("Container \"" + containerName + "\" does not exist.")
 		}
-		var container:IContainer = (IContainer) resource
+		var container:IContainer = resource.asInstanceOf[IContainer]
 		val file:IFile = container.getFile(new Path(fileName))
 		try {
 			val stream:InputStream = openContentStream()
@@ -109,31 +103,33 @@ class ScalaNewWizard extends Wizard with INewWizard {
 				file.create(stream, true, monitor)
 			}
 			stream.close()
-		} catch (IOException e) {
+		} catch {
+		  case e:IOException => println(e toString)
 		}
 		monitor.worked(1)
 		monitor.setTaskName("Opening file for editing...")
 		getShell().getDisplay().asyncExec(new Runnable() {
-			public void run() {
-				IWorkbenchPage page =
+			override def run():Unit= {
+				 val page:IWorkbenchPage =
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 				try {
 					IDE.openEditor(page, file, true)
-				} catch (PartInitException e) {
+				} catch {
+				  case e:PartInitException => println(e toString)
 				}
 			}
 		});
 		monitor.worked(1)
 	}
 	
+	
 	/**
 	 * We will initialize file contents with a sample text.
 	 */
-
 	private def openContentStream():InputStream = {
-		val contents:String =
-			"This is the initial file contents for *.scala file that should be word-sorted in the Preview page of the multi-page editor"
-		return new ByteArrayInputStream(contents.getBytes())
+			val contents:String =
+			"This is the initial file contents for *.scala file that should be word-sorted in the Preview page of the multi-page editor"	
+		new ByteArrayInputStream(contents.getBytes())
 	}
 
 	private def throwCoreException( message:String):Unit = {// throws CoreException {
@@ -179,27 +175,14 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
  * OR with the extension that matches the expected one (scala).
  */
 
-class ScalaNewWizardPage( selection:ISelection) extends WizardPage {
-	var  containerText:Text = null;
+class ScalaNewWizardPage( selection:ISelection) extends WizardPage("wizardPage") {
+	var  containerText:Text = null
 
-	var fileText:Text = null;
+	var fileText:Text = null
 
-	//var selection:ISelection = null;
-
-	/**
-	 * Constructor for SampleNewWizardPage.
-	 * 
-	 * @param pageName
-	 */
-	 /*
-	def this( selection:ISelection) {
-		//super("wizardPage")
-		//setTitle("Multi-page Editor File")
-		//setDescription("This wizard creates a new file with *.scala extension that can be opened by a multi-page editor.")
-		this.selection = selection
-	}
-	*/
-
+	setTitle("Multi-page Editor File")
+	setDescription("This wizard creates a new file with *.scala extension that can be opened by a multi-page editor.")
+	
 	/**
 	 * @see IDialogPage#createControl(Composite)
 	 */
@@ -209,14 +192,14 @@ class ScalaNewWizardPage( selection:ISelection) extends WizardPage {
 		container.setLayout(layout)
 		layout.numColumns = 3
 		layout.verticalSpacing = 9
-		Label label = new Label(container, SWT.NULL)
+		var label:Label = new Label(container, SWT.NULL)
 		label.setText("&Container:")
 
 		containerText = new Text(container, SWT.BORDER | SWT.SINGLE)
-		val gd:GridData = new GridData(GridData.FILL_HORIZONTAL)
+		var gd:GridData = new GridData(GridData.FILL_HORIZONTAL)
 		containerText.setLayoutData(gd)
 		containerText.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
+			override def modifyText( e:ModifyEvent):Unit ={
 				dialogChanged()
 			}
 		});
@@ -224,7 +207,7 @@ class ScalaNewWizardPage( selection:ISelection) extends WizardPage {
 		val button:Button = new Button(container, SWT.PUSH)
 		button.setText("Browse...")
 		button.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
+			override def widgetSelected( e:SelectionEvent):Unit = {
 				handleBrowse()
 			}
 		});
@@ -235,7 +218,7 @@ class ScalaNewWizardPage( selection:ISelection) extends WizardPage {
 		gd = new GridData(GridData.FILL_HORIZONTAL)
 		fileText.setLayoutData(gd)
 		fileText.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
+			override def modifyText( e:ModifyEvent):Unit = {
 				dialogChanged()
 			}
 		});
@@ -250,21 +233,23 @@ class ScalaNewWizardPage( selection:ISelection) extends WizardPage {
 
 	private def initialize():Unit = {
 		if (selection != null && selection.isEmpty() == false
-				&& selection instanceof IStructuredSelection) {
+				&& selection.isInstanceOf[IStructuredSelection] ) {
 			
-			val ssel:IStructuredSelection = (IStructuredSelection) selection
+			val ssel:IStructuredSelection = selection.asInstanceOf[IStructuredSelection]
 			
 			if (ssel.size() > 1){
 				return
 			}
 			
-			val obj:Object = ssel.getFirstElement()
-			if (obj instanceof IResource) {
-				var container:IContainer
-				if (obj instanceof IContainer)
-					container = (IContainer) obj
+			val obj = ssel.getFirstElement()
+			if (obj.isInstanceOf[ IResource]) {
+				var container:IContainer = null
+				
+				if (obj.isInstanceOf[ IContainer])
+					container = obj.asInstanceOf[IContainer]
 				else
-					container = ((IResource) obj).getParent()
+					container = (obj.asInstanceOf[IResource]).getParent()
+					
 				containerText.setText(container.getFullPath().toString())
 			}
 		}
@@ -280,10 +265,10 @@ class ScalaNewWizardPage( selection:ISelection) extends WizardPage {
 		var dialog:ContainerSelectionDialog = new ContainerSelectionDialog(
 				getShell(), ResourcesPlugin.getWorkspace().getRoot(), false,
 				"Select new file container")
-		if (dialog.open() == ContainerSelectionDialog.OK) {
+		if (dialog.open() == 0) {//ContainerSelectionDialog.OK
 			var result:Array[Object] = dialog.getResult()
 			if (result.length == 1) {
-				containerText.setText(((Path) result(0)).toString())
+				containerText.setText((result(0).asInstanceOf[Path]).toString())
 			}
 		}
 	}
